@@ -6,8 +6,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
     folder: "tasksAPPUsers",
-    allowed_formats: ["jpg", "jpeg", "png", "webp"],
-    transformation: [{ width: 500, height: 500, crop: "limit" }],
+    allowedFormats: ["jpg", "jpeg", "png", "webp"],
   },
 });
 

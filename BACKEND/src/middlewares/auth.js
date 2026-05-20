@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user.model");
 
 const auth = async (req, res, next) => {
   try {
@@ -19,19 +19,16 @@ const auth = async (req, res, next) => {
     // 4. Verificamos el token usando la clave secreta
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // 5. Buscamos al usuario pasando el ID directamente (Corregido)
-    // Nota: Asegúrate de que al firmar el token usaste '_id' y no 'id'
-    const user = await User.findById(decoded._id);
+    // 5. Buscamos al usuario pasando el ID directamente
+
+    const user = await User.findById(decoded.id);
 
     if (!user) {
       return res.status(401).json({ message: "User not found" });
     }
-
-    // Agregamos el usuario al objeto de la solicitud
     req.user = user;
     next();
   } catch (error) {
-    // Si el token expiró o está mal manipulado, caerá aquí
     res.status(401).json({ message: "Invalid or expired token" });
   }
 };
