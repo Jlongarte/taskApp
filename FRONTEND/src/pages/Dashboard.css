@@ -1,0 +1,156 @@
+/* Contenedor Global del Tablero */
+.kanban-wrapper {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #172b4d;
+  background-color: #f7f8fa;
+  min-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/*  Barra Superior (Header) */
+.kanban-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 2px solid #dfe1e6;
+  padding-bottom: 16px;
+}
+
+.kanban-info h2 {
+  margin: 0 0 4px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #091e42;
+}
+
+.user-badge {
+  display: inline-block;
+  background-color: #eae6ff;
+  color: #403294;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/*  Estructura de Contenido Principal  */
+.kanban-content {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+/* Sidebar para el formulario */
+.kanban-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+}
+
+.sidebar-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(9, 30, 66, 0.08);
+  border: 1px solid #dfe1e6;
+}
+
+.sidebar-card h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  color: #172b4d;
+  font-weight: 600;
+}
+
+/* Sistema Kanban de Columnas Horizontales */
+.kanban-columns-container {
+  display: flex;
+  gap: 16px;
+  flex-grow: 1;
+  align-items: flex-start;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.kanban-column {
+  flex: 1;
+  min-width: 280px;
+  background-color: #f1f2f4;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(9, 30, 66, 0.12);
+  display: flex;
+  flex-direction: column;
+  max-height: 75vh;
+}
+
+/* Cabecera de cada columna */
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 4px 8px;
+}
+
+.column-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #44546f;
+}
+
+/* Puntos de color para identificar estados */
+.column-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.column-dot.todo {
+  background-color: #ff5630;
+}
+.column-dot.doing {
+  background-color: #0052cc;
+}
+.column-dot.done {
+  background-color: #36b37e;
+}
+
+/* Contador de tareas por columna */
+.task-count {
+  background-color: #dfe1e6;
+  color: #44546f;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: auto;
+}
+
+/* Feedback visual nativo opcional cuando arrastras sobre la columna */
+.kanban-column:active {
+  background-color: #e4e6ea;
+  border: 1px dashed #4c9aff;
+}
+
+/* Adaptabilidad para pantallas móviles */
+@media (max-width: 900px) {
+  .kanban-content {
+    flex-direction: column;
+  }
+  .kanban-sidebar {
+    width: 100%;
+  }
+  .kanban-columns-container {
+    width: 100%;
+  }
+}

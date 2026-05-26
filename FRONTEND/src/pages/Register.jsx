@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/api";
+import "./Login.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -20,66 +21,105 @@ const Register = () => {
     });
   };
 
- const handleSubmit = async (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault();
-    const data = new FormData();
-    data.append("username", formData.username);
-    data.append("email", formData.email);
-    data.append("password", formData.password);
+    setMessage("");
 
-    if (avatar) {
-      data.append("avatar", avatar);
-    }
-    const res = await registerUser(data);
-    if (res.success) {
-      setMessage("Registration successful! Redirecting to login...");
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-    } else {
-      setMessage(res.message || "Registration failed. Please try again.");
-    }
+    const jsonBody = {
+      username: formData.username,
+      email: formData.email,
+      password: formData.password,
+    };
 
-    return (
-        <section>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="file"
-                    name="avatar"
-                    accept="image/*"
-                    onChange={(ev) => setAvatar(ev.target.files[0])}
-                />
-                <button type="submit">Register</button>
-            </form>
-            {message && <p>{message}</p>}
-        </section>
-    )
-  
+    try {
+      const res = await fetch("http://localhost:8080/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jsonBody),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setMessage("Registration successful! Redirecting to login...");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else {
+        setMessage(data.message || "Registration failed. Please try again.");
+      }
+    } catch (error) {
+      setMessage("Server connection error.");
+    }
+  };
+
+  return (
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h2>Create Account</h2>
+          <p>Get started with your new management board</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Email Address</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Profile Avatar (Optional)</label>
+            <input
+              type="file"
+              name="avatar"
+              accept="image/*"
+              onChange={(ev) => setAvatar(ev.target.files[0])}
+              style={{ padding: "6px 0", border: "none", background: "none" }}
+            />
+          </div>
+
+          <button type="submit" className="native-submit-btn">
+            Register
+          </button>
+        </form>
+
+        {message && <div className="auth-error-message">{message}</div>}
+      </div>
+    </div>
+  );
 };
 
 export default Register;

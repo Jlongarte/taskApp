@@ -1,31 +1,64 @@
-import { Navlink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css"; // Vinculamos sus estilos profesionales
 
 const Navbar = ({ token, onLogout }) => {
   return (
-    <nav>
-      <ul>
+    <nav className="trello-nav">
+      <div className="nav-logo">
+        <span className="logo-icon">📋</span> TaskApp
+      </div>
+
+      <ul className="nav-links">
         <li>
-          <Navlink to="/">Home</Navlink>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "active-link" : "")}
+          >
+            Home
+          </NavLink>
         </li>
         {token ? (
           <>
             <li>
-              <Navlink to="/dashboard">Dashboard</Navlink>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Dashboard
+              </NavLink>
             </li>
             <li>
-              <Navlink to="/profile">Profile</Navlink>
+              <NavLink
+                to="/profile"
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Profile
+              </NavLink>
             </li>
-            <li>
-              <button onClick={onLogout}>Logout</button>
+            <li className="logout-item">
+              {/* Usamos tu Web Component aquí */}
+              <custom-button variant="danger" onClick={onLogout}>
+                Logout
+              </custom-button>
             </li>
           </>
         ) : (
           <>
             <li>
-              <Navlink to="/login">Login</Navlink>
+              <NavLink
+                to="/login"
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Login
+              </NavLink>
             </li>
             <li>
-              <Navlink to="/register">Register</Navlink>
+              <NavLink
+                to="/register"
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Register
+              </NavLink>
             </li>
           </>
         )}

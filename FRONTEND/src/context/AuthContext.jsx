@@ -4,8 +4,12 @@ import { getUserProfile } from "../services/api";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(localStorage.getItem("token") || "");
-  const [user, setUser] = useState(null);
+  // Busca dónde defines el useState del token y ponle un string de prueba:
+  const [token, setToken] = useState("token-falso-de-prueba-123");
+  const [user, setUser] = useState({
+    username: "Developer",
+    email: "test@test.com",
+  });
 
   useEffect(() => {
     const loadUser = async () => {

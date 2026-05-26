@@ -8,3 +8,5 @@ const TaskFilters = ({ filters, setFilters }) => {
     </section>
   );
 };
+
+export default TaskFilters;

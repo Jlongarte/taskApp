@@ -1,0 +1,112 @@
+.auth-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  background-color: #f8fafc;
+  padding: 20px;
+}
+
+.auth-card {
+  background: #ffffff;
+  padding: 40px 32px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.auth-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #172b4d;
+  margin-bottom: 6px;
+}
+
+.auth-header p {
+  font-size: 14px;
+  color: #626f84;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #44546f;
+}
+
+.form-group input {
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 2px solid #dfe1e6;
+  background-color: #fafbfc;
+  color: #172b4d;
+  transition: all 0.15s ease-in-out;
+  outline: none;
+}
+
+/* Microinteracción de foco en inputs */
+.form-group input:focus {
+  background-color: #ffffff;
+  border-color: #0c66e4;
+  box-shadow: 0 0 0 3px rgba(12, 102, 228, 0.2);
+}
+
+/* Alertas de error  */
+.auth-error-message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #ffebe6;
+  color: #ae2e24;
+  border-radius: 6px;
+  font-size: 13px;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid #ffbdad;
+}
+
+.native-submit-btn {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: #0c66e4;
+  color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.native-submit-btn:hover {
+  background-color: #0055cc;
+}
+
+.native-submit-btn:active {
+  transform: scale(0.97);
+}

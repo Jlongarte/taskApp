@@ -1,0 +1,45 @@
+/* Contenedor vertical de tarjetas */
+.task-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding: 4px;
+  min-height: 100px;
+  scrollbar-width: thin;
+  scrollbar-color: #dfe1e6 transparent;
+}
+
+/* Estilo para las barras de scroll en Chrome/Safari */
+.task-cards-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-cards-list::-webkit-scrollbar-thumb {
+  background-color: #dfe1e6;
+  border-radius: 3px;
+}
+
+/* Mensaje de columna vacía  */
+.empty-column-text {
+  margin: 0;
+  padding: 24px 16px;
+  text-align: center;
+  color: #7a869a;
+  font-size: 13px;
+  font-style: italic;
+  border: 2px dashed #dfe1e6;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.task-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  flex-grow: 1;
+  min-height: 200px;
+  padding: 8px 4px;
+}
