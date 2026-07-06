@@ -43,3 +43,15 @@
   min-height: 200px;
   padding: 8px 4px;
 }
+
+.empty-column-text {
+  margin: 0;
+  padding: 32px 16px;
+  text-align: center;
+  color: #4b5563; /* Gris apagado discreto */
+  font-size: 13px;
+  font-style: normal;
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.01);
+}

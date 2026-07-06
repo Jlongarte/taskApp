@@ -4,6 +4,8 @@ const cors = require("cors");
 const connectDB = require("./src/config/db");
 const tasksRoutes = require("./src/routes/tasks.routes");
 const authRoutes = require("./src/routes/users.routes");
+const analyticsRoutes = require("./src/routes/analytics.routes");
+const boardRoutes = require('./src/routes/board.routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +19,8 @@ connectDB();
 
 app.use("/tasks", tasksRoutes);
 app.use("/users", authRoutes);
+app.use("/analytics", analyticsRoutes);
+app.use('/boards', boardRoutes);
 
 app.use((req, res, next) => {
   res.status(404).json({ message: "Route Not Found" });

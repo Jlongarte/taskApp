@@ -9,6 +9,11 @@ const register = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already registered" });
+    }
+
     const newUser = new User({
       username,
       email,
@@ -17,11 +22,19 @@ const register = async (req, res) => {
     });
 
     const createdUser = await newUser.save();
-    res.status(201).json(createdUser);
+
+    return res.status(201).json({
+      success: true,
+      message: "User registered successfully",
+      user: createdUser,
+    });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Error registering user", error: error.message });
+    console.error("--- DETALLE DEL ERROR DE REGISTRO ---", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error registering user",
+      error: error.message,
+    });
   }
 };
 

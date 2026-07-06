@@ -1,0 +1,207 @@
+/* 1. Contenedor Principal Expansivo - Tema Oscuro Unificado */
+.profile-page-wrapper {
+  display: flex;
+  min-height: calc(100vh - 65px); /* Se acopla bajo tu Navbar */
+  background-color: #0d0c15; /* Mismo negro azulado del Dashboard */
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #f1f5f9;
+}
+
+/* 2. Barra Lateral Izquierda de Altura Completa Dark */
+.profile-navigation-sidebar {
+  width: 260px;
+  background-color: #12111a; /* Un punto más oscuro para dar profundidad */
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Ajuste de los botones del menú lateral */
+.nav-tab-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #94a3b8; /* Gris elegante que no cansa la vista */
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.nav-tab-item:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+}
+
+/* Pestaña Activa con el haz morado característico */
+.nav-tab-item.active {
+  background-color: rgba(139, 92, 246, 0.15);
+  color: #c084fc; /* El morado brillante de tu web */
+  font-weight: 600;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+}
+
+/* 3. Panel de Contenido Central */
+.profile-content-panel {
+  flex-grow: 1;
+  padding: 40px 60px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* Cabecera Principal */
+.profile-section-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 20px;
+}
+
+.profile-section-header h2 {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffffff; /* Blanco puro */
+  letter-spacing: -0.5px;
+}
+
+.profile-section-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #8a8f98; /* Subtítulo suavizado */
+}
+
+/* Mensajes de Alerta modo oscuro */
+.profile-alert-message {
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: rgba(139, 92, 246, 0.1);
+  color: #d8b4fe;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* 🎚️ 4. Formulario Abierto en Bloques a la Izquierda */
+.profile-form {
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile-form h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+.form-subtitle {
+  margin: -16px 0 4px 0;
+  font-size: 13px;
+  color: #8a8f98;
+}
+
+/* Contenedores de los campos */
+.profile-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+/* Inputs oscuros integrados en el cristal */
+.profile-form-group input {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px 14px;
+  color: #ffffff;
+  background-color: #161522; /* Fondo de inputs idéntico a las tarjetas del dashboard */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.profile-form-group input:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  background-color: #1c1b2b;
+}
+
+.profile-form-group input:focus {
+  outline: none;
+  background-color: #161522;
+  border-color: #8b5cf6; /* Enfoque morado neón */
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.25);
+}
+
+/* Botón Morado de Guardar a la Izquierda */
+.profile-submit-btn {
+  align-self: flex-start; /* Alineación perfecta a la izquierda */
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #8b5cf6;
+  border: 1px solid #a78bfa;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+  transition: all 0.2s ease;
+}
+
+.profile-submit-btn:hover {
+  background-color: #7c3aed;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Modificador para el círculo del Avatar en modo oscuro */
+.profile-form-group div[style*="border-radius: 50%"] {
+  background-color: #161522 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Adaptabilidad para móviles */
+@media (max-width: 768px) {
+  .profile-page-wrapper {
+    flex-direction: column;
+  }
+  .profile-navigation-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 16px;
+  }
+  .profile-content-panel {
+    padding: 24px;
+  }
+}

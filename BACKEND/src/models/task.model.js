@@ -16,10 +16,20 @@ const taskSchema = new mongoose.Schema(
       enum: ["pending", "in progress", "completed"],
       default: "pending",
     },
+    comments: { // 💬 1. AGREGAMOS EL CAMPO DE COMENTARIOS
+      type: String,
+      default: "",
+      trim: true,
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    board: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Board',
+      default: null    
     },
   },
   {

@@ -1,0 +1,90 @@
+.auth-form,
+.sidebar-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Estilización global de inputs y selects en el panel oscuro */
+.sidebar-card input[type="text"],
+.sidebar-card input[type="date"],
+.sidebar-card select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 14px;
+  color: #ffffff;
+  background-color: #1f1e2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.sidebar-card input:focus,
+.sidebar-card select:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.25);
+}
+
+/* Botón de envío del formulario estilo Taskify */
+.sidebar-card button[type="submit"] {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #8b5cf6;
+  border: 1px solid #a78bfa;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 6px;
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.sidebar-card button[type="submit"]:hover {
+  background-color: #7c3aed;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
+}
+
+/* Actualiza o añade esta regla específica para el select */
+.sidebar-card select {
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 40px 10px 14px; /* 💡 Clave: 40px a la derecha para que la flecha respire */
+  color: #ffffff;
+  background-color: #1f1e2e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  /* Esto estiliza la apariencia nativa en algunos navegadores */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* Reinyectamos una flecha elegante SVG personalizada si quieres que combine al 100%, 
+     o si prefieres mantener la nativa bien posicionada, elimina estas 3 líneas de abajo: */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
+/* 📅 Ajuste extra para que el icono del calendario tampoco se quede pegado */
+.sidebar-card input[type="date"] {
+  padding-right: 14px;
+}
+
+/* Separación interna para los iconos nativos de fecha de Chrome/Safari */
+.sidebar-card input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  /* Hace que el icono pase a ser grisáceo elegante en vez de negro nativo */
+  filter: invert(0.8);
+}

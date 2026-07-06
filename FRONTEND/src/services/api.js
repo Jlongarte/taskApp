@@ -69,37 +69,25 @@ const updateAvatar = async (token, formdata) => {
 
 //TASKS
 
-const getTasks = async (token, filters = {}) => {
-  const params = new URLSearchParams(filters);
-  if (filters.status) {
-    params.append("status", filters.status);
-  }
-  if (filters.date) {
-    params.append("date", filters.date);
-  }
-  if (filters.sort) {
-    params.append("sort", filters.sort);
-  }
-
-  const res = await fetch(`${API_URL}/tasks?${params.toString()}`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+// 🌍 getTasks debe apuntar a tu ruta general de tareas
+const getTasks = async (token) => {
+  const response = await fetch(`http://localhost:8080/tasks`, {
+    headers: { 'Authorization': `Bearer ${token}` }
   });
-  return res.json();
+  return response.json();
 };
 
+// ➕ createTask debe hacer el POST a la ruta raíz de tareas
 const createTask = async (token, taskData) => {
-  const res = await fetch(`${API_URL}/tasks`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+  const response = await fetch(`http://localhost:8080/tasks`, {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}` 
     },
-    body: JSON.stringify(taskData),
+    body: JSON.stringify(taskData) // Aquí ya viajan title, date, status, comments y board
   });
-  return res.json();
+  return response.json();
 };
 
 const updateTask = async (token, id, taskData) => {
