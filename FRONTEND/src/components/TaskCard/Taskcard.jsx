@@ -4,7 +4,7 @@ import "./TaskCard.css";
 const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
   const [isEditHover, setIsEditHover] = useState(false);
   const [isDeleteHover, setIsDeleteHover] = useState(false);
-  const [isTimerHover, setIsTimerHover] = useState(false); // ⏱️ Estado hover para el Pomodoro
+  const [isTimerHover, setIsTimerHover] = useState(false);
 
   const handleDragStart = (ev) => {
     ev.dataTransfer.setData("text/plain", task._id || task.id);
@@ -12,7 +12,7 @@ const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
 
   const targetId = task._id || task.id;
 
-  // 🎨 Estilos dinámicos en línea para el botón de EDIT
+  // --- STYLES SECTION ---
   const editStyle = {
     fontFamily: "inherit",
     fontSize: "11px",
@@ -35,7 +35,6 @@ const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
     pointerEvents: "auto",
   };
 
-  // 🎨 Estilos dinámicos en línea para el botón de DELETE
   const deleteStyle = {
     fontFamily: "inherit",
     fontSize: "11px",
@@ -58,7 +57,6 @@ const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
     pointerEvents: "auto",
   };
 
-  // 🎨 Estilos dinámicos en línea para el botón del cronómetro POMODORO
   const timerButtonStyle = {
     background: "none",
     border: "none",
@@ -73,6 +71,7 @@ const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
     justifyContent: "center",
   };
 
+  // --- RENDER SECTION ---
   return (
     <div 
       className="kanban-task-card" 
@@ -80,8 +79,6 @@ const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
       onDragStart={handleDragStart}
       style={{ position: "relative" }} 
     >
-      
-      {/* ⏱️ PIN FLOTANTE DEL POMODORO CON COORDENADAS ABSOLUTAS */}
       <button
         type="button"
         className="card-pomodoro-trigger"
@@ -93,22 +90,20 @@ const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
           zIndex: 10,
           margin: 0,
         }}
-        onClick={() => onStartPomodoro(task)}
+        onClick={() => onStartPomodoro && onStartPomodoro(task)}
         onMouseEnter={() => setIsTimerHover(true)}
         onMouseLeave={() => setIsTimerHover(false)}
         title="Start Pomodoro Focus"
       >
-        ⏱️
+        ⏰
       </button>
 
-      {/* Título normal de la tarjeta */}
-      <div className="card-content" style={{ paddingRight: "30px" }}> {/* 💡 Margen extra para que el texto no pise el emoji */}
+      <div className="card-content" style={{ paddingRight: "30px" }}>
         <h3>{task.title || "Untitled Task"}</h3>
       </div>
 
       <div className="card-footer">
         <span className="task-date">
-          🗓️{" "}
           {task.createdAt
             ? new Date(task.createdAt).toLocaleDateString()
             : "No date"}
@@ -145,5 +140,7 @@ const TaskCard = ({ task, onEdit, onDelete, onStartPomodoro }) => {
         </div>
       </div>
     </div>
-  )};
+  );
+};
+
 export default TaskCard;

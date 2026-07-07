@@ -130,7 +130,7 @@ const TaskForm = ({ onSubmitTask, taskToEdit, clearTaskToEdit }) => {
       {/* ❓ NUEVOS BOTONES DE RADIO: ¿Desea añadirlo a un tablero? */}
       <div className="form-group">
         <label style={{ display: "block", marginBottom: "0.5rem", fontSize: "14px", color: "#94a3b8" }}>
-          ¿Desea añadirlo a un tablero?
+          Would you like to add this to a board?
         </label>
         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "0.5rem" }}>
           <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontSize: "14px", color: "#fff" }}>
@@ -148,41 +148,41 @@ const TaskForm = ({ onSubmitTask, taskToEdit, clearTaskToEdit }) => {
             <input
               type="radio"
               name="hasBoardOption"
-              value="si"
-              checked={hasBoardOption === "si"}
+              value="yes"
+              checked={hasBoardOption === "yes"}
               onChange={handleRadioChange}
               style={{ accentColor: "#6366f1", width: "16px", height: "16px", cursor: "pointer" }}
             />
-            Sí
+            Yes
           </label>
         </div>
       </div>
 
       {/* 📁 Despliegue condicional si pulsa "Sí" */}
-      {hasBoardOption === "si" && (
+      {hasBoardOption === "yes" && (
         <div className="form-group" style={{ animation: "fadeIn 0.2s ease" }}>
           {boards.length === 0 ? (
             /* 💙 Caso: No hay tableros creados (¡Ahora en AZUL!) */
             <div style={{ padding: "10px", background: "rgba(59, 130, 246, 0.1)", border: "1px dashed #3b82f6", borderRadius: "8px", fontSize: "13px", textAlign: "center" }}>
-              <p style={{ color: "#60a5fa", marginBottom: "6px", fontWeight: "500" }}>No tienes tableros disponibles.</p>
+              <p style={{ color: "#60a5fa", marginBottom: "6px", fontWeight: "500" }}>You don't have any boards yet.</p>
               <Link to="/workspaces" style={{ color: "#a78bfa", fontWeight: "600", textDecoration: "underline" }}>
-                🛠️ Crear Tablero
+                Create Board
               </Link>
             </div>
           ) : (
             /* ✅ Caso: Sí hay tableros */
             <>
               <label style={{ display: "block", marginBottom: "0.25rem", fontSize: "13px", color: "#a78bfa" }}>
-                Selecciona el Tablero destino
+                Select a destination board
               </label>
               <select
                 name="board"
                 value={formData.board}
                 onChange={handleChange}
-                required={hasBoardOption === "si"}
+                required={hasBoardOption === "yes"}
                 style={{ borderColor: "#3b82f6" }} // Borde azul a juego
               >
-                <option value="">-- Selecciona un tablero --</option>
+                <option value="">-- Select a board --</option>
                 {boards.map((b) => (
                   <option key={b._id} value={b._id}>
                     {b.name}
@@ -195,7 +195,7 @@ const TaskForm = ({ onSubmitTask, taskToEdit, clearTaskToEdit }) => {
       )}
 
       {/* 🚀 Botón de acción principal */}
-      <button type="submit" disabled={hasBoardOption === "si" && boards.length === 0}>
+      <button type="submit" disabled={hasBoardOption === "yes" && boards.length === 0}>
         {taskToEdit ? "Save Changes" : "Create Task"}
       </button>
 

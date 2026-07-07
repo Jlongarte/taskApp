@@ -182,6 +182,21 @@
   transform: translateY(-1px);
 }
 
+.home-dark-viewport{
+    position:relative;
+    min-height:100vh;
+    overflow:hidden;
+    background:#05010d;
+}
+.background-effect{
+    position:absolute;
+    inset:0;
+    z-index:0;
+}
+.home-hero-container{
+    position:relative;
+    z-index:2;
+}
 /* Ajustes Responsive */
 @media (max-width: 600px) {
   .hero-title {

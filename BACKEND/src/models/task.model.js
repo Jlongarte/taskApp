@@ -31,6 +31,11 @@ const taskSchema = new mongoose.Schema(
       ref: 'Board',
       default: null    
     },
+        progress: {
+      type: Number,
+      enum: [0, 25, 50, 75, 100],
+      default: 0 
+},
   },
   {
     timestamps: true,

@@ -1,19 +1,18 @@
-/* 1. Estilos Base de la Barra (Aseguramos que combine con el modo oscuro) */
-.trello-nav {
+/* Estilos Base de la Barra  */
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 14px 40px;
-  background-color: #0b0a0f; /* Sincronizado con el fondo oscuro */
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   position: relative;
-  z-index: 100; /* Siempre por encima del contenido */
+  z-index: 100; 
 }
 
 .nav-logo {
   color: #ffffff;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 900;
+  font-size: 25px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -41,9 +40,9 @@
   color: #ffffff;
 }
 
-/* 2. Disparador del Avatar (Botón) */
+/* Disparador del Avatar  */
 .avatar-dropdown-container {
-  position: relative; /* Clave para el posicionamiento absoluto del menú hijo */
+  position: relative; 
 }
 
 .avatar-trigger-btn {
@@ -62,7 +61,7 @@
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(139, 92, 246, 0.4); /* Aro de luz morado sutil */
+  border: 2px solid rgba(139, 92, 246, 0.4); 
   transition: border-color 0.2s ease;
 }
 
@@ -85,13 +84,13 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* 3. MENÚ FLOTANTE (Dropdown) */
+/* MENÚ FLOTANTE (Dropdown) */
 .nav-dropdown-menu {
   position: absolute;
-  top: 48px; /* Separación vertical de la barra */
+  top: 48px; 
   right: 0;
   width: 220px;
-  background-color: #12111a; /* Fondo ultra dark pulido */
+  background-color: #12111a; 
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
@@ -159,12 +158,61 @@
   color: #ffffff !important;
 }
 
-/* Acción destructiva de cierre de sesión */
+/* cierre de sesión */
 .logout-btn {
-  color: #f87171 !important; /* Rojo sutil */
+  color: #f87171 !important; 
 }
 
 .logout-btn:hover {
   background-color: rgba(239, 68, 68, 0.08);
   color: #ef4444 !important;
+}
+
+/*  Estilos Base de la Barra  */
+
+.mobile-menu-links {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .trello-nav {
+    padding: 14px 24px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .trello-nav {
+    height: auto !important; 
+    padding: 10px 16px;      
+  }
+
+  .nav-logo {
+    font-size: 20px;         
+  }
+
+  .nav-links .desktop-link {
+    display: none;
+  }
+
+  .nav-links {
+    gap: 0;
+  }
+
+  
+  .nav-dropdown-menu {
+    top: 40px;              
+    width: 220px;
+    max-height: 80vh;        
+    overflow-y: auto;        
+  }
+
+  .mobile-menu-links {
+    display: block;
+  }
 }

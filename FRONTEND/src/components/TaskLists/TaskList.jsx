@@ -1,16 +1,16 @@
-import TaskCard from "../TaskCard/TaskCard";
 
-// 🔗 CLAVE: ¡Tenemos que recibir 'startPomodoro' aquí arriba!
-const TaskList = ({ tasks, onEdit, onDelete, startPomodoro }) => {
+import TaskCard from "../TaskCard/TaskCard"; // Ajusta la ruta a tu estructura
+
+const TaskList = ({ tasks, onEdit, onDelete, onStartPomodoro }) => {
   return (
-    <div className="task-cards-list">
+    <div className="task-list">
       {tasks.map((task) => (
         <TaskCard
           key={task._id || task.id}
           task={task}
           onEdit={onEdit}
           onDelete={onDelete}
-          startPomodoro={startPomodoro} // 🔗 Y volver a pasarlo hacia abajo aquí
+          onStartPomodoro={onStartPomodoro} // 👈 Súper importante: si falta esto aquí, la app se rompe
         />
       ))}
     </div>

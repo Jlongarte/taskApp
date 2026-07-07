@@ -26,14 +26,14 @@ createRoot(document.getElementById("root")).render(
             <Route path="register" element={<Register />} />
             {/* Rutas Protegidas */}
             <Route element={<ProtectedRoute />}>
-              <Route path="/dashboard/:boardId" element={<Dashboard />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="profile" element={<Profile />} />
               <Route path="analytics" element={<AnalyticsView />} />
               <Route path="/workspaces" element={<WorkspacesView />} />
             </Route>
           </Route>
 
-          {/* 404 */}
+          {/* Error 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

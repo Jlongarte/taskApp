@@ -1,158 +1,27 @@
 /* ==========================================
-   1. CONTENEDOR GLOBAL & PALETA DARK
+   1. GLOBAL CONTAINER & BASE STYLES
    ========================================== */
 .kanban-wrapper {
-  padding: 32px;
   max-width: 1600px;
   margin: 0 auto;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #f1f5f9;
-  background-color: #0d0c15; /* Fondo oscuro espacial profundo */
-  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #0d0c15;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
-/* ==========================================
-   2. BARRA SUPERIOR (HEADER ALTO CONTRASTE)
-   ========================================== */
-
-/* 🎯 SELECTOR DE FILTRADO GLOBAL (ZONA FLECHA) */
 .global-filter-container {
   display: flex;
   align-items: center;
 }
 
 /* ==========================================
-   3. DISTRIBUCIÓN PRINCIPAL DEL CORE
+   2. KANBAN HEADER & PROGRESS BAR
    ========================================== */
-.kanban-content {
-  display: flex;
-  gap: 28px;
-  align-items: flex-start;
-  flex-grow: 1;
-}
-
-/* Formulario lateral */
-.kanban-sidebar {
-  width: 290px;
-  flex-shrink: 0;
-}
-
-.sidebar-card {
-  background: #161522;
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.sidebar-card h3 {
-  margin: 0 0 20px 0;
-  font-size: 16px;
-  color: #ffffff;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ==========================================
-   4. INTERFAZ DE COLUMNAS KANBAN
-   ========================================== */
-.kanban-columns-container {
-  display: flex;
-  gap: 20px;
-  flex-grow: 1;
-  align-items: flex-start;
-  overflow-x: auto;
-  padding-bottom: 16px;
-}
-
-.kanban-column {
-  flex: 1;
-  min-width: 300px;
-  background-color: #161522;
-  border-radius: 16px;
-  padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  display: flex;
-  flex-direction: column;
-  max-height: 80vh;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Ampliación de la zona de soltado reactiva */
-.kanban-column .task-cards-list {
-  flex-grow: 1;
-  min-height: 350px;
-}
-
-/* Cabeceras de carril */
-.column-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-  padding: 4px 8px;
-}
-
-.column-header h3 {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: #94a3b8;
-}
-
-/* Microindicadores de estado */
-.column-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-.column-dot.todo {
-  background-color: #6366f1;
-}
-.column-dot.doing {
-  background-color: #eab308;
-}
-.column-dot.done {
-  background-color: #22c55e;
-}
-
-.task-count {
-  background-color: rgba(255, 255, 255, 0.06);
-  color: #94a3b8;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-/* ==========================================
-   5. COMPORTAMIENTOS DINÁMICOS & FOCO SMART
-   ========================================== */
-/* Hover Drag activo por encima */
-.kanban-column.column-drag-hover {
-  background-color: #1e1b30 !important;
-  border: 1px dashed #8b5cf6 !important;
-  transform: scale(1.01);
-}
-
-/* 🧠 Efecto de atenuación cuando el filtro global está activo */
-.kanban-column.column-dimmed {
-  opacity: 0.15;
-  filter: blur(0.5px) grayscale(40%);
-  pointer-events: none; /* Bloquea clics e interacción en carriles filtrados */
-  transform: scale(0.98);
-}
-
-/* ==========================================================================
-   🎯 MAQUETACIÓN CORREGIDA Y PREMIUM PARA EL KANBAN HEADER
-   ========================================================================== */
-
 .kanban-header {
   display: flex;
   flex-direction: column;
@@ -161,10 +30,8 @@
   padding: 24px;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.04);
-  margin-bottom: 24px;
 }
 
-/* Fila superior: Alinea la info a la izquierda y las acciones a la derecha */
 .kanban-header-top {
   display: flex;
   justify-content: space-between;
@@ -172,11 +39,10 @@
   width: 100%;
 }
 
-/* Bloque de bienvenida de usuario */
 .kanban-info {
   display: flex;
   align-items: center;
-  gap: 14px; /* Espacio horizontal elegante entre el título y el saludo */
+  gap: 14px;
 }
 
 .kanban-info h2 {
@@ -186,7 +52,6 @@
   color: #ffffff;
 }
 
-/* Forzamos a que el badge no se caiga hacia abajo */
 .user-badge {
   background-color: rgba(139, 92, 246, 0.1);
   border: 1px solid rgba(139, 92, 246, 0.2);
@@ -197,66 +62,52 @@
   font-weight: 500;
   display: inline-flex;
   align-items: center;
-  white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+  white-space: nowrap;
 }
 
-/* Contenedor de acciones (Botón + Select) alineados perfectamente */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.history-toggle-btn {
-  background: rgba(255, 255, 255, 0.04);
+.history-toggle-btn,
+.global-status-select {
+  height: 38px;
+  background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #94a3b8;
-  padding: 9px 16px;
+  color: #ffffff;
+  padding: 0 16px;
   border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  height: 38px; /* Forzamos la misma altura que el select */
   box-sizing: border-box;
-  transition: all 0.2s ease;
-}
-
-.history-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.15);
-}
-/* Sincronizamos el select global para que vaya a juego con el botón */
-.global-status-select {
-  height: 38px;
-  background-color: #151421; /* Fondo oscuro a juego con el header */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #ffffff;
-  padding: 0 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
   outline: none;
-  box-sizing: border-box;
   transition: all 0.2s ease;
 }
 
+.global-status-select {
+  background-color: #151421;
+  display: block;
+}
+
+.history-toggle-btn:hover,
 .global-status-select:hover {
   background-color: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.15);
 }
 
-/* 🎯 CORRECCIÓN CLAVE: Forzamos el modo oscuro en el menú desplegable (las opciones) */
 .global-status-select option {
-  background-color: #151421 !important; /* Fondo negro/oscuro para la lista desplegable */
-  color: #ffffff !important; /* Texto blanco nítido */
+  background-color: #151421 !important;
+  color: #ffffff !important;
   padding: 10px;
 }
-/* Seccion de la Barra de Progreso */
+
 .dashboard-progress-container {
   display: flex;
   flex-direction: column;
@@ -291,28 +142,145 @@
   height: 100%;
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
   border-radius: 10px;
-  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.4s ease;
 }
 
-/* Aplicamos el mismo menú desplegable oscuro al select del formulario lateral */
+/* ==========================================
+   3. CORE LAYOUT & SIDEBAR
+   ========================================== */
+.kanban-content {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.kanban-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.sidebar-card {
+  background: #161522;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-card h3 {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  color: #ffffff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .sidebar-card select option,
 form select option {
   background-color: #161522 !important;
   color: #ffffff !important;
 }
 
-/* ==========================================================================
-   📜 PANEL LATERAL DE HISTORIAL PREMIUM (GLASSMORPHISM)
-   ========================================================================== */
+/* ==========================================
+   4. KANBAN COLUMNS AND CARDS LIST
+   ========================================== */
+.kanban-columns-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  flex-grow: 1;
+  align-items: flex-start;
+  width: 100%;
+}
 
+.kanban-column {
+  background-color: #161522;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.task-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: auto;
+  overflow: visible;
+  min-height: 150px;
+}
+
+.column-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 4px 2px;
+}
+
+.column-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.column-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.column-dot.todo { background-color: #6366f1; }
+.column-dot.doing { background-color: #eab308; }
+.column-dot.done { background-color: #22c55e; }
+
+.task-count {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.task-list{
+   
+    display: flex;
+    flex-direction: column;
+     gap: 8px;
+}
+/* ==========================================
+   5. INTERACTION & DRAG STYLES
+   ========================================== */
+.kanban-column.column-drag-hover {
+  background-color: #1e1b30 !important;
+  border: 1px dashed #8b5cf6 !important;
+}
+
+.kanban-column.column-dimmed {
+  opacity: 0.15;
+  filter: blur(0.5px) grayscale(40%);
+  pointer-events: none;
+}
+
+/* ==========================================
+   6. ACTIVITY HISTORY SIDEBAR
+   ========================================== */
 .activity-sidebar {
   position: fixed;
   top: 0;
-  right: -340px; /* Un pelín más ancho para que respire el texto */
-  width: 340px;
+  right: -360px;
+  width: 360px;
   height: 100vh;
-  background-color: rgba(21, 20, 33, 0.85); /* Fondo semitransparente */
-  backdrop-filter: blur(12px); /* El efecto cristal premium */
+  background-color: rgba(21, 20, 33, 0.85);
+  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-left: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
@@ -339,7 +307,6 @@ form select option {
   font-size: 16px;
   font-weight: 600;
   color: #ffffff;
-  letter-spacing: 0.3px;
 }
 
 .close-history-btn {
@@ -354,23 +321,19 @@ form select option {
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  transition: all 0.15s ease;
 }
 
 .close-history-btn:hover {
   background: rgba(248, 113, 113, 0.15);
-  border-color: rgba(248, 113, 113, 0.3);
   color: #f87171;
 }
 
-/* Contenedor con scroll inteligente oculto */
 .sidebar-history-content {
   padding: 24px;
   overflow-y: auto;
   flex: 1;
 }
 
-/* Diseñamos una barra de scroll minimalista para que no sea la fea nativa */
 .sidebar-history-content::-webkit-scrollbar {
   width: 4px;
 }
@@ -389,7 +352,7 @@ form select option {
 }
 
 .history-list {
-  list-style: none; /* Corregido de list-items a list-style */
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
@@ -401,12 +364,11 @@ form select option {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  border-left: 2px solid #8b5cf6; /* Línea morada de guía */
+  border-left: 2px solid #8b5cf6;
   padding-left: 14px;
   position: relative;
 }
 
-/* Pequeño nodo estético en cada item */
 .history-item::before {
   content: "";
   position: absolute;
@@ -416,14 +378,12 @@ form select option {
   height: 8px;
   border-radius: 50%;
   background-color: #8b5cf6;
-  box-shadow: 0 0 8px #8b5cf6;
 }
 
 .history-time {
   font-size: 11px;
   color: #64748b;
   font-family: monospace;
-  font-weight: 500;
 }
 
 .history-item-text {
@@ -433,9 +393,49 @@ form select option {
   line-height: 1.4;
 }
 
-/* ==========================================================================
-   ⏱️ ADVANCED POMODORO WIDGET EFFECTS
-   ========================================================================== */
+/* ==========================================
+   7. FLOATING POMODORO WIDGET
+   ========================================== */
+.pomodoro-floating-widget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #1e1e2e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 9999;
+  animation: slideIn 0.3s ease-out;
+}
+
+.pomodoro-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pomodoro-task-title {
+  margin: 0;
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.pomodoro-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pomodoro-timer {
+  font-family: monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f38ba8;
+}
 
 .pomodoro-btn {
   background: rgba(255, 255, 255, 0.04) !important;
@@ -447,44 +447,18 @@ form select option {
   padding: 6px 14px !important;
   border-radius: 6px !important;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-/* Cambios dinámicos de color según el estado */
 .pomodoro-btn.play {
-  background-color: rgba(
-    16,
-    185,
-    129,
-    0.1
-  ) !important; /* Esmeralda sutil si está en pausa */
+  background-color: rgba(16, 185, 129, 0.1) !important;
   border-color: rgba(16, 185, 129, 0.3) !important;
   color: #34d399 !important;
 }
 
-.pomodoro-btn.play:hover {
-  background-color: rgba(16, 185, 129, 0.2) !important;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.15);
-}
-
 .pomodoro-btn.pause {
-  background-color: rgba(
-    245,
-    158,
-    11,
-    0.1
-  ) !important; /* Ámbar si está corriendo */
+  background-color: rgba(245, 158, 11, 0.1) !important;
   border-color: rgba(245, 158, 11, 0.3) !important;
   color: #fbbf24 !important;
-}
-
-.pomodoro-btn.pause:hover {
-  background-color: rgba(245, 158, 11, 0.2) !important;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
 }
 
 .pomodoro-btn.close {
@@ -495,15 +469,59 @@ form select option {
   font-size: 14px !important;
 }
 
-.pomodoro-btn.close:hover {
-  color: #ef4444 !important;
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
-/* Responsividad para monitores pequeños y portátiles */
+
+/* ==========================================
+   8. RESPONSIVE BREAKPOINTS 
+   ========================================== */
+   /* Tablet */
 @media (max-width: 1024px) {
+  /* Ajustes para tablets */
+}
+@media (max-width: 768px) {
+  .kanban-wrapper {
+    padding: 16px;
+  }
+
+  .kanban-header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .history-toggle-btn,
+  .global-status-select {
+    flex: 1;
+  }
+
   .kanban-content {
     flex-direction: column;
   }
+
   .kanban-sidebar {
     width: 100%;
+  }
+
+  .kanban-columns-container {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+
+  .pomodoro-floating-widget {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    justify-content: space-between;
   }
 }

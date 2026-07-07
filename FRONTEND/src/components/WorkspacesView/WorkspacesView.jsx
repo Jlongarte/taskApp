@@ -1,126 +1,311 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
-import "./WorkspacesView.css"; // Tus estilos actuales
+import confetti from "canvas-confetti"; 
+import "./WorkspacesView.css"; // Importación de tus estilos en la hoja CSS externa
 
 const WorkspacesView = () => {
   const { token } = useAuth();
   const [boards, setBoards] = useState([]);
-  const [tasks, setTasks] = useState([]); // 📦 1. Añadimos estado para almacenar las tareas
+  const [tasks, setTasks] = useState([]);
 
-  // 🔄 2. Cargar Tableros y Tareas en paralelo al montar la pantalla
-  useEffect(() => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [createFormData, setCreateFormData] = useState({ name: "", description: "", color: "#6366f1" });
+
+  const [activeMenuId, setActiveMenuId] = useState(null);
+  const [editingBoard, setEditingBoard] = useState(null);
+  const [editFormData, setEditFormData] = useState({ name: "", description: "", color: "#6366f1" });
+
+  const [activeTaskSliderId, setActiveTaskSliderId] = useState(null);
+
+  const loadData = () => {
     if (!token) return;
 
-    // Traer tus tableros (Ruta sin /api que corregimos)
-    fetch("http://localhost:8080/boards", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch("http://localhost:8080/boards", { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) setBoards(data);
-        else if (data && Array.isArray(data.boards)) setBoards(data.boards);
-      })
+      .then((data) => setBoards(Array.isArray(data) ? data : data.boards || []))
       .catch((err) => console.error("Error cargando tableros:", err));
 
-    // Traer tus tareas globales
-    fetch("http://localhost:8080/api/tasks", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch("http://localhost:8080/tasks", { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => res.json())
-      .then((data) => {
-        if (Array.isArray(data)) setTasks(data);
-        else if (data && Array.isArray(data.tasks)) setTasks(data.tasks);
-      })
-      .catch((err) => console.error("Error cargando tareas en Workspaces:", err));
-  }, [token]);
+      .then((data) => setTasks(Array.isArray(data) ? data : data.tasks || []))
+      .catch((err) => console.error("Error cargando tareas:", err));
+  };
+
+  useEffect(() => { loadData(); }, [token]);
+
+  const handleCreateBoard = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:8080/boards", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(createFormData)
+      });
+      if (res.ok) {
+        setIsCreateModalOpen(false);
+        setCreateFormData({ name: "", description: "", color: "#6366f1" });
+        loadData();
+      }
+    } catch (err) { console.error("Error al crear el tablero:", err); }
+  };
+
+  const handleDeleteBoard = async (id) => {
+    if (!window.confirm("¿Seguro que deseas eliminar este tablero?")) return;
+    try {
+      const res = await fetch(`http://localhost:8080/boards/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        setActiveMenuId(null);
+        loadData();
+      }
+    } catch (err) { console.error("Error eliminando tablero:", err); }
+  };
+
+  const openEditModal = (board) => {
+    setEditingBoard(board);
+    setEditFormData({
+      name: board.name,
+      description: board.description || "",
+      color: board.color || "#6366f1"
+    });
+    setActiveMenuId(null);
+  };
+
+  const handleSaveBoardEdit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`http://localhost:8080/boards/${editingBoard._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(editFormData)
+      });
+      if (res.ok) {
+        setEditingBoard(null);
+        loadData();
+      }
+    } catch (err) { console.error("Error editando tablero:", err); }
+  };
+
+  const handleProgressChange = async (taskId, newProgressValue) => {
+    const progressNum = parseInt(newProgressValue, 10);
+    
+    if (progressNum === 100) {
+      confetti({
+        particleCount: 150,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
+
+    setTasks(prev => prev.map(t => t._id === taskId ? { ...t, progress: progressNum } : t));
+
+    try {
+      await fetch(`http://localhost:8080/tasks/${taskId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ progress: progressNum })
+      });
+    } catch (err) { console.error("Error actualizando progreso:", err); }
+  };
+
+  const filteredBoards = boards.filter(board => {
+    return board.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+           (board.description && board.description.toLowerCase().includes(searchTerm.toLowerCase()));
+  });
 
   return (
-    <div className="workspaces-wrapper">
-      <h2>Mis Espacios de Trabajo</h2>
-      <p>Selecciona un tablero para gestionar tus tareas operativas.</p>
+    <div className="workspaces-container">
+      
+      {/* 🔝 SECCIÓN SUPERIOR */}
+      <div className="workspaces-header-section">
+        <div className="workspaces-title-group">
+          <h2>Mis Espacios de Trabajo</h2>
+          <p>Administra, busca y clasifica tus proyectos de alto nivel.</p>
+        </div>
+        
+        <div className="workspaces-action-group">
+          <input 
+            type="text" 
+            placeholder="🔍 Buscar tablero..." 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="workspaces-search-input"
+          />
+          <button onClick={() => setIsCreateModalOpen(true)} className="workspaces-btn-create">
+            ➕ Nuevo Tablero
+          </button>
+        </div>
+      </div>
 
-      <div className="boards-grid" style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", marginTop: "1.5rem" }}>
-        {boards.map((board) => {
-          // 🔍 3. Filtramos las tareas que pertenecen en exclusiva a este tablero
-          // 🔍 FILTRADO ULTRA-SEGURO DE TABLEROS
-const boardTasks = tasks.filter(t => {
-  if (!t.board) return false;
-
-  // Extraemos el ID tanto si viene populado como objeto, como si viene como String plano
-  const taskBoardId = typeof t.board === 'object' ? t.board._id : t.board;
-  const currentBoardId = typeof board._id === 'object' ? board._id.toString() : board._id;
-
-  // Convertimos ambos a String para evitar que Mongoose u ObjectIds rompan la comparación
-  return String(taskBoardId) === String(currentBoardId);
-});
+      {/* 🎴 CUADRÍCULA DE TARJETAS */}
+      <div className="workspaces-boards-grid">
+        {filteredBoards.map((board) => {
+          // 🔍 FILTRADO ULTRA-SEGURO DE TAREAS ASOCIADAS
+          const boardTasks = tasks.filter(t => {
+            if (!t.board) return false;
+            const taskBoardId = typeof t.board === 'object' ? t.board._id : t.board;
+            return String(taskBoardId) === String(board._id);
+          });
 
           return (
             <div 
               key={board._id} 
-              className="board-card" 
-              style={{
-                background: "#13131a",
-                borderTop: `4px solid ${board.color || "#6366f1"}`, // Tu barra lila superior de image_cf6a7d.png
-                borderRadius: "12px",
-                padding: "20px",
-                minWidth: "280px",
-                boxShadow: "0 4px 12px rgba(0,0,0,0.2)"
-              }}
+              className="workspaces-board-card" 
+              style={{ borderTop: `4px solid ${board.color || "#6366f1"}` }}
             >
-              <h3 style={{ color: "#fff", margin: "0 0 4px 0" }}>{board.name}</h3>
-              <p style={{ color: "#94a3b8", fontSize: "13px", margin: "0 0 16px 0" }}>{board.description || "Tablero de proyectos dinámico"}</p>
+              {/* ⚙️ MENÚ DESPLEGABLE (TRES PUNTOS) */}
+              <div className="workspaces-options-menu">
+                <button 
+                  onClick={() => setActiveMenuId(activeMenuId === board._id ? null : board._id)}
+                  className="workspaces-btn-dots"
+                >
+                  ⋮
+                </button>
+                {activeMenuId === board._id && (
+                  <div className="workspaces-dropdown-box">
+                    <button onClick={() => openEditModal(board)} className="workspaces-dropdown-btn">✏️ Editar</button>
+                    <button onClick={() => handleDeleteBoard(board._id)} className="workspaces-dropdown-btn btn-delete">🗑️ Eliminar</button>
+                  </div>
+                )}
+              </div>
 
-              {/* 📋 4. PINTAR LAS TAREAS DE ESTE TABLERO AQUÍ DENTRO */}
-              <div className="board-tasks-preview" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <span style={{ fontSize: "11px", fontWeight: "bold", color: "#6366f1", textTransform: "uppercase", letterSpacing: "0.5px" }}>
-                  Tareas ({boardTasks.length}):
-                </span>
+              <h3>{board.name}</h3>
+              <p className="board-desc">{board.description || "Sin descripción asignada"}</p>
+
+              {/* 📋 PREVISUALIZACIÓN DE TAREAS */}
+              <div className="workspaces-tasks-section">
+                <span className="workspaces-tasks-title">Tareas ({boardTasks.length}):</span>
                 
                 {boardTasks.length === 0 ? (
-                  <p style={{ color: "#475569", fontSize: "13px", fontStyle: "italic", margin: "4px 0 0 0" }}>
-                    Sin tareas asignadas
-                  </p>
+                  <p className="workspaces-no-tasks">Sin tareas vinculadas</p>
                 ) : (
-                  boardTasks.map(task => (
-                    <div 
-                      key={task._id} 
-                      style={{
-                        background: "rgba(255,255,255,0.02)",
-                        border: "1px solid rgba(255,255,255,0.05)",
-                        padding: "8px 12px",
-                        borderRadius: "6px",
-                        fontSize: "13px",
-                        color: "#e2e8f0"
-                      }}
-                    >
-                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                        <strong style={{ color: "#fff" }}>{task.title}</strong>
-                        {/* Una pequeña etiqueta de estado estética */}
-                        <span style={{ 
-                          fontSize: "10px", 
-                          padding: "2px 6px", 
-                          borderRadius: "4px",
-                          background: task.status === "completed" ? "rgba(16, 185, 129, 0.15)" : task.status === "in progress" ? "rgba(245, 158, 11, 0.15)" : "rgba(148, 163, 184, 0.15)",
-                          color: task.status === "completed" ? "#10b981" : task.status === "in progress" ? "#f59e0b" : "#94a3b8"
-                        }}>
-                          {task.status}
-                        </span>
+                  boardTasks.map(task => {
+                    const currentProgress = task.progress ?? 0;
+                    const isCompleted = currentProgress === 100;
+
+                    return (
+                      <div 
+                        key={task._id} 
+                        className={`workspaces-task-item ${isCompleted ? 'is-completed' : ''}`}
+                      >
+                        <div className="workspaces-task-row">
+                          <span className="workspaces-task-title">{task.title}</span>
+                          <button
+                            onClick={() => setActiveTaskSliderId(activeTaskSliderId === task._id ? null : task._id)}
+                            className="workspaces-btn-percentage"
+                          >
+                            {currentProgress}%
+                          </button>
+                        </div>
+
+                        {task.comments && <p className="workspaces-task-comments">💬 {task.comments}</p>}
+
+                        {/* 🎛️ BARRA DESLIZABLE MOVIBLE */}
+                        {activeTaskSliderId === task._id && (
+                          <div className="workspaces-slider-container">
+                            <div className="workspaces-slider-header">
+                              <span>Progreso:</span>
+                              <strong>{currentProgress}%</strong>
+                            </div>
+                            <input 
+                              type="range" 
+                              min="0" 
+                              max="100" 
+                              step="25" 
+                              value={currentProgress} 
+                              onChange={(e) => handleProgressChange(task._id, e.target.value)}
+                              className="workspaces-range-input"
+                            />
+                            <div className="workspaces-slider-labels">
+                              <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      
-                      {/* Mostrar los comentarios si los tiene creados */}
-                      {task.comments && (
-                        <p style={{ color: "#64748b", fontSize: "11px", margin: "4px 0 0 0", fontStyle: "italic" }}>
-                          💬 {task.comments}
-                        </p>
-                      )}
-                    </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </div>
           );
         })}
       </div>
+
+      {/* ➕ MODAL: CREAR TABLERO */}
+      {isCreateModalOpen && (
+        <div className="workspaces-modal-backdrop">
+          <form onSubmit={handleCreateBoard} className="workspaces-modal-form">
+            <h3>Crear Nuevo Tablero</h3>
+            
+            <div className="workspaces-modal-form-group workspaces-form-group">
+              <label>Nombre del Tablero</label>
+              <input type="text" placeholder="ej: Proyecto de Diseño" value={createFormData.name} onChange={e => setCreateFormData({...createFormData, name: e.target.value})} required />
+            </div>
+
+            <div className="workspaces-modal-form-group workspaces-form-group">
+              <label>Descripción</label>
+              <input type="text" placeholder="Breve descripción..." value={createFormData.description} onChange={e => setCreateFormData({...createFormData, description: e.target.value})} />
+            </div>
+
+            <div className="workspaces-modal-form-group workspaces-form-group">
+              <label>Color Identificador</label>
+              <div className="workspaces-color-picker-row">
+                <input type="color" value={createFormData.color} onChange={e => setCreateFormData({...createFormData, color: e.target.value})} className="workspaces-color-input" />
+                <span className="workspaces-color-hex">{createFormData.color.toUpperCase()}</span>
+              </div>
+            </div>
+
+            <div className="workspaces-modal-actions">
+              <button type="submit" className="workspaces-btn-submit">Crear</button>
+              <button type="button" onClick={() => setIsCreateModalOpen(false)} className="workspaces-btn-cancel">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* ✏️ MODAL: EDITAR TABLERO */}
+      {editingBoard && (
+        <div className="workspaces-modal-backdrop">
+          <form onSubmit={handleSaveBoardEdit} className="workspaces-modal-form">
+            <h3>Ajustes del Tablero</h3>
+            
+            <div className="workspaces-modal-form-group workspaces-form-group">
+              <label>Nombre del Proyecto</label>
+              <input type="text" value={editFormData.name} onChange={e => setEditFormData({...editFormData, name: e.target.value})} required />
+            </div>
+
+            <div className="workspaces-modal-form-group workspaces-form-group">
+              <label>Descripción</label>
+              <input type="text" value={editFormData.description} onChange={e => setEditFormData({...editFormData, description: e.target.value})} />
+            </div>
+
+            <div className="workspaces-modal-form-group workspaces-form-group">
+              <label>Color de Identificación</label>
+              <div className="workspaces-color-picker-row">
+                <input type="color" value={editFormData.color} onChange={e => setEditFormData({...editFormData, color: e.target.value})} className="workspaces-color-input" />
+                <span className="workspaces-color-hex">{editFormData.color.toUpperCase()}</span>
+              </div>
+            </div>
+
+            <div className="workspaces-modal-actions">
+              <button type="submit" className="workspaces-btn-submit">Guardar</button>
+              <button type="button" onClick={() => setEditingBoard(null)} className="workspaces-btn-cancel">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

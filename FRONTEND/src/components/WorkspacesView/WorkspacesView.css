@@ -64,3 +64,386 @@
   font-size: 0.875rem;
   line-height: 1.4;
 }
+
+/* Container principal de la vista */
+.workspaces-container {
+  padding: 20px;
+}
+
+/* Encabezado superior (Título, Buscador, Botón) */
+.workspaces-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.workspaces-title-group h2 {
+  margin: 0;
+  color: #ffffff;
+}
+
+.workspaces-title-group p {
+  margin: 4px 0 0 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.workspaces-action-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Input del Buscador */
+.workspaces-search-input {
+  padding: 9px 14px;
+  border-radius: 8px;
+  background: #1e1e24;
+  border: 1px solid #333333;
+  color: #ffffff;
+  width: 220px;
+  font-size: 13px;
+  transition: border-color 0.2s ease;
+}
+
+.workspaces-search-input:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+/* Botón Crear Nuevo Tablero */
+.workspaces-btn-create {
+  padding: 9px 16px;
+  background: #6366f1;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.workspaces-btn-create:hover {
+  background: #4f46e5;
+}
+
+/* Cuadrícula de Tableros */
+.workspaces-boards-grid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Tarjeta de Tablero */
+.workspaces-board-card {
+  background: #13131a;
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 300px;
+  flex: 1 1 300px;
+  max-width: 380px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.workspaces-board-card h3 {
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  padding-right: 25px;
+}
+
+.workspaces-board-card .board-desc {
+  color: #94a3b8;
+  font-size: 13px;
+  margin: 0 0 16px 0;
+}
+
+/* Menú de Tres Puntos (Opciones de la Tarjeta) */
+.workspaces-options-menu {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.workspaces-btn-dots {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.workspaces-btn-dots:hover {
+  color: #94a3b8;
+}
+
+.workspaces-dropdown-box {
+  position: absolute;
+  right: 0;
+  top: 25px;
+  background: #1e1e24;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 10;
+  width: 110px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.workspaces-dropdown-btn {
+  width: 100%;
+  padding: 8px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background 0.2s ease;
+}
+
+.workspaces-dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.workspaces-dropdown-btn.btn-delete {
+  color: #f87171;
+  border-top: 1px solid #333333;
+}
+
+.workspaces-dropdown-btn.btn-delete:hover {
+  background: rgba(248, 113, 113, 0.1);
+}
+
+/* Listado de Tareas Operativas dentro del Tablero */
+.workspaces-tasks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workspaces-tasks-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: #6366f1;
+  text-transform: uppercase;
+}
+
+.workspaces-no-tasks {
+  color: #475569;
+  font-size: 12px;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Tarjeta de Tarea Individual */
+.workspaces-task-item {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+/* Estado completado (100%) para la Tarea */
+.workspaces-task-item.is-completed {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.workspaces-task-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.workspaces-task-title {
+  color: #e2e8f0;
+}
+
+.workspaces-task-item.is-completed .workspaces-task-title {
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* Botón de Porcentaje */
+.workspaces-btn-percentage {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background: #272732;
+  color: #a78bfa;
+  transition: background 0.2s ease;
+}
+
+.workspaces-task-item.is-completed .workspaces-btn-percentage {
+  background: #10b981;
+  color: #ffffff;
+}
+
+.workspaces-task-comments {
+  color: #64748b;
+  font-size: 11px;
+  margin: 4px 0 0 0;
+  font-style: italic;
+}
+
+/* Contenedor del Slider desplegable */
+.workspaces-slider-container {
+  margin-top: 10px;
+  padding: 8px;
+  background: #1e1e24;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.workspaces-slider-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.workspaces-slider-header strong {
+  color: #6366f1;
+}
+
+.workspaces-range-input {
+  width: 100%;
+  accent-color: #6366f1;
+  cursor: pointer;
+}
+
+.workspaces-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #475569;
+  padding: 0 2px;
+}
+
+/* Modales Emergentes (Estructura Común para Crear y Editar) */
+.workspaces-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.workspaces-modal-form {
+  background: #13131a;
+  padding: 25px;
+  border-radius: 12px;
+  width: 320px;
+  border: 1px solid #333333;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.workspaces-modal-form h3 {
+  color: #ffffff;
+  margin: 0;
+}
+
+.workspaces-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.workspaces-form-group label {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.workspaces-form-group input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  background: #1e1e24;
+  border: 1px solid #333333;
+  color: #ffffff;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.workspaces-form-group input[type="text"]:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+/* Bloque del Selector de Color */
+.workspaces-color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.workspaces-color-input {
+  width: 50px;
+  height: 35px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.workspaces-color-hex {
+  font-size: 12px;
+  color: #ffffff;
+  font-family: monospace;
+}
+
+/* Botonera del Modal */
+.workspaces-modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.workspaces-btn-submit {
+  flex: 1;
+  padding: 10px;
+  background: #6366f1;
+  border: none;
+  color: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.workspaces-btn-submit:hover {
+  background: #4f46e5;
+}
+
+.workspaces-btn-cancel {
+  flex: 1;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #333333;
+  color: #94a3b8;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.workspaces-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}

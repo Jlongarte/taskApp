@@ -1,4 +1,4 @@
-import "./App.css";
+import "./index.css";
 import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./context/AuthContext";

@@ -1,6 +1,5 @@
-:root {
-  --background-color: #050408;
-}
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
   margin: 0;
@@ -12,15 +11,37 @@ body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
-  
   color: #1e293b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
-  height: 100vh;
-  width: 100vw;
+  
+  /* 👈 CORRECCIÓN CLAVE: Permitimos que la pantalla crezca verticalmente */
+  overflow-y: auto !important; 
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #050408;
 }
 
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh; /* 👈 Ocupa al menos toda la pantalla */
+  background-color: #050408;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: auto; /* 👈 Deja que los componentes hijos estiren el contenedor */
+  background-color: #0d0c15;
+}
+
+/* ==========================================
+   SCROLLBAR STYLES
+   ========================================== */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -31,10 +52,35 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #334155; /* 👈 Oscurecido un poco para combinar con tu tema dark */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #475569;
+}
+
+h1, h2, h3, button {
+font-family: "Google Sans Flex", sans-serif;
+}
+
+p {
+  font-family: "Inter Tight", sans-serif;
+}
+
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+
+  background-color: #050408;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  
+  background-color:#0d0c15;
 }

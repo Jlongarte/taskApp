@@ -33,49 +33,58 @@ const getAllTasks = async (req, res) => {
 
 const createTask = async (req, res) => {
   try {
-    // 📥 1. Extraemos 'comments' y 'board' del req.body junto a los demás campos
-    const { title, date, status, comments, board } = req.body;
+    const { title, date, status, comments, board, progress } = req.body;
 
-    if (!title || !date) {
-      return res.status(400).json({ message: "Title and date are required" });
-    }
-
-    // 🧼 2. Limpieza crucial: Si board viene vacío (""), nulo o no se seleccionó,
-    // lo forzamos a ser 'null' para que Mongoose no intente validarlo como un ID erróneo.
+    // Si viene de los botones de radio como vacío o no viene, se guarda como null real
     const cleanBoardId = board && board.trim() !== "" ? board : null;
 
-    // 🏗️ 3. Instanciamos la tarea inyectando todas las novedades
     const newTask = new Task({
       title,
       date,
       status: status || "pending",
-      comments: comments || "", // Soportamos tus comentarios
-      board: cleanBoardId,       // Pasamos el ID del tablero limpio (o null)
+      comments: comments || "",
+      board: cleanBoardId, // 👈 Aquí se inyecta el ID del tablero
       user: req.user._id,
+      progress: progress || 0,
     });
 
     const savedTask = await newTask.save();
     return res.status(201).json(savedTask);
-
   } catch (error) {
-    console.error("Error creating task:", error);
-    return res.status(500).json({ message: "Server error", error: error.message });
+    console.error(error);
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
+
 const updateTask = async (req, res) => {
   try {
-    const { title, date, status } = req.body;
+    // 📥 1. Extraemos 'progress' y 'comments' además de los campos anteriores
+    const { title, date, status, comments, progress, board } = req.body;
+
     const task = await Task.findById(req.params.id);
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
+
     if (task.user.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: "Unauthorized" });
     }
+
+    // 🔄 2. Mapeamos las actualizaciones (respetando los valores anteriores si no se envían)
     task.title = title || task.title;
     task.date = date || task.date;
     task.status = status || task.status;
+    task.comments = comments !== undefined ? comments : task.comments;
+    
+    // 🎛️ IMPORTANTE: Evaluamos si viene el campo progreso (usando typeof porque 0 es falsy en JS)
+    task.progress = typeof progress === "number" ? progress : task.progress;
+    
+    // 📁 Soportar también si se cambia de tablero en la edición
+    if (board !== undefined) {
+      task.board = board && board.trim() !== "" ? board : null;
+    }
+
     const updatedTask = await task.save();
     return res.status(200).json(updatedTask);
   } catch (error) {
@@ -83,7 +92,7 @@ const updateTask = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
-// ✅ CÓDIGO CORREGIDO (Opción A):
+
 const deleteTask = async (req, res) => {
   try {
     const { id } = req.params;

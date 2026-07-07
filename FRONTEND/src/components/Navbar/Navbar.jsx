@@ -1,26 +1,24 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // 💡 Extraemos los datos del usuario real
+import { useAuth } from "../../context/AuthContext";
 import "./Navbar.css";
 
 const Navbar = ({ token, onLogout }) => {
   const { user } = useAuth();
-  // 💡 Estado para abrir y cerrar el menú flotante
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-
-  // Cierra el menú al hacer clic en un enlace
   const closeDropdown = () => setDropdownOpen(false);
 
   return (
-    <nav className="trello-nav">
+    <nav >
       <div className="nav-logo">
-        <span className="logo-icon">📋</span> TaskApp
+        <p>TaskApp</p> 
       </div>
 
       <ul className="nav-links">
-        <li>
+        {/* Enlaces de escritorio  */}
+        <li className="desktop-link">
           <NavLink
             to="/"
             className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -31,17 +29,7 @@ const Navbar = ({ token, onLogout }) => {
 
         {token ? (
           <>
-            {/* 📊 NUEVO ENLACE A LA PANTALLA DE ANALÍTICAS */}
-            <li>
-              <NavLink
-                to="/analytics"
-                className={({ isActive }) => (isActive ? "active-link" : "")}
-              >
-                Analytics
-              </NavLink>
-            </li>
-
-            <li>
+            <li className="desktop-link">
               <NavLink
                 to="/dashboard"
                 className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -49,8 +37,17 @@ const Navbar = ({ token, onLogout }) => {
                 Dashboard
               </NavLink>
             </li>
-            {/* 💼 NUEVO ENLACE A LA GESTIÓN DE MÚLTIPLES TABLEROS */}
-            <li>
+
+            <li className="desktop-link">
+              <NavLink
+                to="/analytics"
+                className={({ isActive }) => (isActive ? "active-link" : "")}
+              >
+                Analytics
+              </NavLink>
+            </li>
+            
+            <li className="desktop-link">
               <NavLink
                 to="/workspaces"
                 className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -59,7 +56,6 @@ const Navbar = ({ token, onLogout }) => {
               </NavLink>
             </li>
 
-            {/* 👤 MENÚ DESPLEGABLE CON EL AVATAR DEL USUARIO */}
             <li className="avatar-dropdown-container">
               <button className="avatar-trigger-btn" onClick={toggleDropdown}>
                 {user?.avatar ? (
@@ -77,7 +73,6 @@ const Navbar = ({ token, onLogout }) => {
                 )}
               </button>
 
-              {/* Menú flotante condicional */}
               {dropdownOpen && (
                 <div className="nav-dropdown-menu">
                   <div className="dropdown-user-info">
@@ -91,12 +86,29 @@ const Navbar = ({ token, onLogout }) => {
 
                   <hr className="dropdown-divider" />
 
+                  {/* Enlaces exclusivos para la versión móvil dentro del menú */}
+                  <div className="mobile-menu-links">
+                    <NavLink to="/" className="dropdown-item" onClick={closeDropdown}>
+                      Home
+                    </NavLink>
+                    <NavLink to="/dashboard" className="dropdown-item" onClick={closeDropdown}>
+                       Dashboard
+                    </NavLink>
+                    <NavLink to="/analytics" className="dropdown-item" onClick={closeDropdown}>
+                      Analytics
+                    </NavLink>
+                    <NavLink to="/workspaces" className="dropdown-item" onClick={closeDropdown}>
+                      Workspaces
+                    </NavLink>
+                    <hr className="dropdown-divider" />
+                  </div>
+
                   <Link
                     to="/profile"
                     className="dropdown-item"
                     onClick={closeDropdown}
                   >
-                    ⚙️ Account Profile
+                     Account Profile
                   </Link>
 
                   <button
@@ -106,7 +118,7 @@ const Navbar = ({ token, onLogout }) => {
                       onLogout();
                     }}
                   >
-                    🚪 Sign Out
+                     Sign Out
                   </button>
                 </div>
               )}
@@ -114,7 +126,7 @@ const Navbar = ({ token, onLogout }) => {
           </>
         ) : (
           <>
-            <li>
+            <li className="desktop-link">
               <NavLink
                 to="/login"
                 className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -122,7 +134,7 @@ const Navbar = ({ token, onLogout }) => {
                 Login
               </NavLink>
             </li>
-            <li>
+            <li className="desktop-link">
               <NavLink
                 to="/register"
                 className={({ isActive }) => (isActive ? "active-link" : "")}
