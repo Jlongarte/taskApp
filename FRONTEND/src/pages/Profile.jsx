@@ -9,13 +9,13 @@ const Profile = () => {
   const [message, setMessage] = useState("");
   const { user } = useAuth();
 
-  // 💡 ESTADO CLAVE: Controla qué pestaña está activa ("profile", "security" o "appearance")
+  // ESTADO CLAVE: Controla qué pestaña está activa ("profile", "security" o "appearance")
   const [activeTab, setActiveTab] = useState("profile");
 
   // Función auxiliar para cambiar de pestaña limpiando el mensaje anterior
   const handleTabChange = (tabName) => {
     setActiveTab(tabName);
-    setMessage(""); // Limpia la alerta de éxito/error al cambiar de sección
+    setMessage(""); 
   };
 
   return (
@@ -26,19 +26,19 @@ const Profile = () => {
           className={`nav-tab-item ${activeTab === "profile" ? "active" : ""}`}
           onClick={() => handleTabChange("profile")}
         >
-          👤 My Profile
+          My Profile
         </button>
         <button
           className={`nav-tab-item ${activeTab === "security" ? "active" : ""}`}
           onClick={() => handleTabChange("security")}
         >
-          🔒 Security
+          Security
         </button>
         <button
           className={`nav-tab-item ${activeTab === "appearance" ? "active" : ""}`}
           onClick={() => handleTabChange("appearance")}
         >
-          🖼️ Appearance
+          Appearance
         </button>
       </aside>
 
@@ -54,7 +54,7 @@ const Profile = () => {
         {/* Mensaje global para los formularios */}
         {message && <div className="profile-alert-message">{message}</div>}
 
-        {/* 💡 RENDERIZADO CONDICIONAL: Solo se muestra el componente que coincide con la pestaña activa */}
+        {/* RENDERIZADO CONDICIONAL: Solo se muestra el componente que coincide con la pestaña activa */}
         {activeTab === "profile" && <UserNameForm onMessage={setMessage} />}
         {activeTab === "security" && <PasswordForm onMessage={setMessage} />}
         {activeTab === "appearance" && <AvatarForm onMessage={setMessage} />}

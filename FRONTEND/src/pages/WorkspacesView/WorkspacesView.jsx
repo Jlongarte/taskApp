@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import confetti from "canvas-confetti"; 
-import "./WorkspacesView.css"; // Importación de tus estilos en la hoja CSS externa
+import "./WorkspacesView.css"; 
 
 const WorkspacesView = () => {
   const { token } = useAuth();

@@ -58,11 +58,13 @@ const Register = () => {
   return (
     <div className="auth-container">
       <div className="auth-card">
+        {/*  Encabezado */}
         <div className="auth-header">
           <h2>Create Account</h2>
           <p>Get started with your new management board</p>
         </div>
 
+        {/*  Formulario */}
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label>Username</label>
@@ -102,13 +104,22 @@ const Register = () => {
 
           <div className="form-group">
             <label>Profile Avatar (Optional)</label>
-            <input
-              type="file"
-              name="avatar"
-              accept="image/*"
-              onChange={(ev) => setAvatar(ev.target.files[0])}
-              style={{ padding: "6px 0", border: "none", background: "none" }}
-            />
+            <div className="custom-file-wrapper">
+              <label htmlFor="avatar-upload" className="custom-file-btn">
+                Choose File
+              </label>
+              <span className="custom-file-text">
+                {avatar ? avatar.name : "No file chosen"}
+              </span>
+              <input
+                id="avatar-upload"
+                type="file"
+                name="avatar"
+                accept="image/*"
+                onChange={(ev) => setAvatar(ev.target.files[0])}
+                className="hidden-file-input"
+              />
+            </div>
           </div>
 
           <button type="submit" className="native-submit-btn">

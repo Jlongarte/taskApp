@@ -10,8 +10,8 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
-import { AnalyticsView } from '../src/components/AnalyticsView/AnalyticsView.jsx';
-import  WorkspacesView  from '../src/components/WorkspacesView/WorkspacesView.jsx';
+import { AnalyticsView } from '../src/pages/AnalyticsView/AnalyticsView.jsx';
+import  WorkspacesView  from '../src/pages/WorkspacesView/WorkspacesView.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(

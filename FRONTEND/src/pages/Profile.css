@@ -1,17 +1,17 @@
-/* 1. Contenedor Principal Expansivo - Tema Oscuro Unificado */
+/* Contenedor Principal Expansivo */
 .profile-page-wrapper {
   display: flex;
-  min-height: calc(100vh - 65px); /* Se acopla bajo tu Navbar */
-  background-color: #0d0c15; /* Mismo negro azulado del Dashboard */
+  min-height: calc(100vh - 65px); 
+  background-color: #0d0c15; 
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #f1f5f9;
 }
 
-/* 2. Barra Lateral Izquierda de Altura Completa Dark */
+/* Barra Lateral Izquierda */
 .profile-navigation-sidebar {
   width: 260px;
-  background-color: #12111a; /* Un punto más oscuro para dar profundidad */
+  background-color: #12111a; 
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   padding: 32px 16px;
   display: flex;
@@ -27,7 +27,7 @@
   gap: 12px;
   padding: 12px 16px;
   border-radius: 8px;
-  color: #94a3b8; /* Gris elegante que no cansa la vista */
+  color: #94a3b8; 
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
@@ -45,7 +45,7 @@
   color: #ffffff;
 }
 
-/* Pestaña Activa con el haz morado característico */
+/* Pestaña Activa */
 .nav-tab-item.active {
   background-color: rgba(139, 92, 246, 0.15);
   color: #c084fc; /* El morado brillante de tu web */
@@ -53,7 +53,7 @@
   border: 1px solid rgba(139, 92, 246, 0.25);
 }
 
-/* 3. Panel de Contenido Central */
+/*Panel de Contenido Central */
 .profile-content-panel {
   flex-grow: 1;
   padding: 40px 60px;
@@ -73,14 +73,14 @@
   margin: 0 0 6px 0;
   font-size: 26px;
   font-weight: 700;
-  color: #ffffff; /* Blanco puro */
+  color: #ffffff; 
   letter-spacing: -0.5px;
 }
 
 .profile-section-header p {
   margin: 0;
   font-size: 14px;
-  color: #8a8f98; /* Subtítulo suavizado */
+  color: #8a8f98; 
 }
 
 /* Mensajes de Alerta modo oscuro */
@@ -94,7 +94,7 @@
   border: 1px solid rgba(139, 92, 246, 0.2);
 }
 
-/* 🎚️ 4. Formulario Abierto en Bloques a la Izquierda */
+/* Formulario  */
 .profile-form {
   background: transparent;
   border: none;
@@ -133,13 +133,13 @@
   color: #cbd5e1;
 }
 
-/* Inputs oscuros integrados en el cristal */
+/* Inputs  */
 .profile-form-group input {
   font-family: inherit;
   font-size: 14px;
   padding: 12px 14px;
   color: #ffffff;
-  background-color: #161522; /* Fondo de inputs idéntico a las tarjetas del dashboard */
+  background-color: #161522; 
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   width: 100%;
@@ -156,13 +156,13 @@
 .profile-form-group input:focus {
   outline: none;
   background-color: #161522;
-  border-color: #8b5cf6; /* Enfoque morado neón */
+  border-color: #8b5cf6;
   box-shadow: 0 0 10px rgba(139, 92, 246, 0.25);
 }
 
-/* Botón Morado de Guardar a la Izquierda */
+/* Botón Morado de Guardar */
 .profile-submit-btn {
-  align-self: flex-start; /* Alineación perfecta a la izquierda */
+  align-self: flex-start; 
   font-family: inherit;
   font-size: 14px;
   font-weight: 600;

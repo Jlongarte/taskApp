@@ -1,18 +1,29 @@
-/* 1. Contenedor Base - Universo Oscuro Sincronizado */
+
+html:has(.auth-container),
+body:has(.auth-container),
+#root:has(.auth-container),
+.app-layout:has(.auth-container),
+.app-main:has(.auth-container) {
+  overflow-y: auto !important; 
+  height: auto !important;
+  min-height: 100vh !important;
+}
+
+/*  Contenedor Base */
 .auth-container {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100vh; 
   background-color: #050408;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  padding: 40px 20px; 
+  overflow: visible !important; 
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
 }
 
-/* 🔮 2. EFECTO GLOW PURPLE TRASERO (Aura Neón Detrás de la Tarjeta) */
 .auth-container::before {
   content: "";
   position: absolute;
@@ -28,13 +39,11 @@
   mix-blend-mode: screen;
   pointer-events: none;
   z-index: 1;
-  /* Animación de latido lumínico */
   animation: loginGlowPulse 6s infinite ease-in-out;
 }
 
 @keyframes loginGlowPulse {
-  0%,
-  100% {
+  0%, 100% {
     transform: scale(1);
     opacity: 0.7;
   }
@@ -44,43 +53,28 @@
   }
 }
 
-/* 🪟 3. TARJETA EFECTO GLASSMORPHISM FLOTANTE */
+/*  Tarjeta Principal */
 .auth-card {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 420px;
   padding: 40px;
-
-  /* Cristal traslúcido pulido */
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-
-  /* Bordes de alta gama estilo Framer */
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-
-  /* Sombra profunda + sutil destello de contorno */
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-
-  /* Animación de suspensión gravitatoria */
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: loginFloat 5s infinite ease-in-out;
 }
 
 @keyframes loginFloat {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  } /* Eleva la tarjeta suavemente */
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); } 
 }
 
-/* 4. Textos del Encabezado */
+/*  Encabezado */
 .auth-header {
   text-align: center;
   margin-bottom: 32px;
@@ -100,7 +94,7 @@
   margin: 0;
 }
 
-/* 5. Estructura del Formulario e Inputs */
+/*  Formulario e Inputs */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -124,7 +118,6 @@
   font-size: 14px;
   padding: 12px 16px;
   color: #ffffff;
-  /* Inputs semi-transparentes integrados en el cristal */
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 10px;
@@ -135,15 +128,54 @@
   color: #4b5563;
 }
 
-/* Enfoque iluminado al escribir */
 .form-group input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.05);
-  border-color: #a78bfa; /* Borde morado Taskify */
+  border-color: #a78bfa; 
   box-shadow: 0 0 12px rgba(139, 92, 246, 0.25);
 }
 
-/* ⚡ 6. BOTÓN DE INGRESO PÚRPURA PREMIUM */
+/*  Selector de Archivos */
+.custom-file-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.hidden-file-input {
+  display: none !important;
+}
+
+.custom-file-btn {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #cbd5e1 !important;
+  padding: 8px 16px !important;
+  border-radius: 8px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.custom-file-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+.custom-file-text {
+  font-size: 13px;
+  color: #8a8f98;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+/*  Botón Submit */
 .native-submit-btn {
   font-family: inherit;
   font-size: 14px;
@@ -155,9 +187,7 @@
   border-radius: 10px;
   cursor: pointer;
   margin-top: 10px;
-  box-shadow:
-    0 0 15px rgba(139, 92, 246, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: all 0.25s ease;
 }
 
@@ -171,7 +201,7 @@
   transform: translateY(0px);
 }
 
-/* 🚨 Alertas de error adaptadas al Modo Oscuro */
+/*  Alertas */
 .auth-error-message {
   margin-top: 20px;
   padding: 12px;
@@ -181,5 +211,5 @@
   text-align: center;
   background-color: rgba(239, 68, 68, 0.1);
   color: #fca5a5;
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }

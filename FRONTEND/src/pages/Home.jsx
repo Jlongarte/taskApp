@@ -25,7 +25,7 @@ const Home = () => {
       </div>
       
       <section className="home-hero-container">
-        {/* Pequeña insignia superior 'Made by Framer' style */}
+        {/* Pequeña insignia superior style */}
         <div className="framer-badge">
           <span className="badge-sparkle">✦</span> Made for Developers
         </div>

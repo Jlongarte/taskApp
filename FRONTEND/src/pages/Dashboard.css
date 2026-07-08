@@ -2,9 +2,8 @@
    1. GLOBAL CONTAINER & BASE STYLES
    ========================================== */
 .kanban-wrapper {
-  max-width: 1600px;
+
   margin: 0 auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: #0d0c15;
   display: flex;
   flex-direction: column;

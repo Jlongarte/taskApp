@@ -1,63 +1,35 @@
-/* 1. Fondo Oscuro Absoluto */
+/*  Contenedor Principal y Fondo */
 .home-dark-viewport {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  background-color: #050408; /* Un punto más negro para aumentar el contraste */
+  height: 100vh; 
+  background-color: #05010d; 
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
-  background-image: url("../assets/descarga.png");
-  background-size: contain;
-  background-position: bottom;
-  background-repeat: no-repeat;
+  overflow: hidden; 
 }
 
-/* 🔮 2. DOBLE EFECTO GLOWING ULTRA-INTENSO (Modo pantalla de alta fusión) */
-.purple-glow-bg {
+.background-effect {
   position: absolute;
-  bottom: -15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 750px; /* Más grande */
-  height: 450px;
-  /* Mezcla de Púrpura eléctrico y azul neón para dar profundidad */
-  background: radial-gradient(
-    circle,
-    rgba(147, 51, 234, 0.55) 0%,
-    rgba(79, 70, 229, 0.25) 40%,
-    rgba(0, 0, 0, 0) 70%
-  );
-  filter: blur(80px); /* Desenfoque mayor para que se esparza como gas */
-  mix-blend-mode: screen; /* 💡 Clave: Hace que los colores brillen de forma digital */
-  z-index: 1;
-  pointer-events: none;
-  animation: megaPulse 5s infinite ease-in-out;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none; 
+  overflow: hidden; 
 }
 
-/* Animación avanzada de respiración lumínica */
-@keyframes megaPulse {
-  0% {
-    opacity: 0.6;
-    transform: translateX(-50%) scale(1);
-    filter: blur(80px);
-  }
-  50% {
-    opacity: 0.95;
-    transform: translateX(-50%) scale(1.15); /* Expansión cíclica */
-    filter: blur(65px); /* Se enfoca y brilla más en el centro */
-  }
-  100% {
-    opacity: 0.6;
-    transform: translateX(-50%) scale(1);
-    filter: blur(80px);
-  }
+/* Fuerza a que cualquier canvas interno herede el comportamiento de no-scroll */
+.background-effect canvas,
+.background-effect > div {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
 }
 
-/* 🌀 3. CONTENEDOR FLOTANTE (Efecto Levitación de Gravedad Cero) */
+/*  Contenedor Hero */
 .home-hero-container {
   position: relative;
   z-index: 2;
@@ -67,27 +39,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  /* 💡 Animación de levitación flotante */
   animation: floatElevation 6s infinite ease-in-out;
-  bottom: 100px;
+  transform: translateY(-20px); 
 }
 
 @keyframes floatElevation {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(
-      -12px
-    ); /* Eleva suavemente todo el bloque 12 píxeles */
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  0% { transform: translateY(-20px); }
+  50% { transform: translateY(-32px); }
+  100% { transform: translateY(-20px); }
 }
 
-/* Insignia Superior */
+/*  Insignia Superior */
 .framer-badge {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -105,10 +67,10 @@
 
 .badge-sparkle {
   color: #c084fc;
-  text-shadow: 0 0 8px #a855f7; /* Brillo en la estrella */
+  text-shadow: 0 0 8px #a855f7; 
 }
 
-/* Texto del Título Principal */
+/*  Título Principal */
 .hero-title {
   color: #ffffff;
   font-size: 58px;
@@ -123,7 +85,7 @@
   color: #94a3b8;
 }
 
-/* Subtítulo */
+/*  Subtítulo */
 .hero-subtitle {
   color: #8a8f98;
   font-size: 16px;
@@ -132,7 +94,7 @@
   margin: 0 0 40px 0;
 }
 
-/* 4. Grupo de Botones */
+/*  Grupo de Botones */
 .hero-cta-group {
   display: flex;
   gap: 16px;
@@ -148,26 +110,19 @@
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 💡 BOTÓN PRIMARIO ULTRA-GLOWY */
 .cta-primary {
-  background-color: #8b5cf6; /* Un morado un punto más eléctrico */
+  background-color: #8b5cf6; 
   color: #ffffff;
   border: 1px solid #a78bfa;
-  box-shadow:
-    0 0 20px rgba(139, 92, 246, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .cta-primary:hover {
   background-color: #7c3aed;
-  /* Al poner el cursor, el destello trasero se vuelve masivo */
-  box-shadow:
-    0 0 35px rgba(124, 58, 237, 0.85),
-    0 0 12px rgba(255, 255, 255, 0.2);
-  transform: scale(1.03) translateY(-2px);
+  box-shadow: 0 0 35px rgba(124, 58, 237, 0.85), 0 0 12px rgba(255, 255, 255, 0.2);
+  transform: scale(1.03); 
 }
 
-/* Botón Secundario Translúcido */
 .cta-secondary {
   background-color: rgba(255, 255, 255, 0.02);
   color: #cbd5e1;
@@ -179,35 +134,69 @@
   background-color: rgba(255, 255, 255, 0.07);
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.18);
-  transform: translateY(-1px);
 }
 
-.home-dark-viewport{
-    position:relative;
-    min-height:100vh;
-    overflow:hidden;
-    background:#05010d;
-}
-.background-effect{
-    position:absolute;
-    inset:0;
-    z-index:0;
-}
-.home-hero-container{
-    position:relative;
-    z-index:2;
-}
-/* Ajustes Responsive */
-@media (max-width: 600px) {
-  .hero-title {
-    font-size: 40px;
+/*  Responsive */
+@media (max-width: 1024px) {
+  .home-hero-container {
+    transform: translateY(-10px);
+    animation: floatElevationMobile 6s infinite ease-in-out;
   }
+
+  @keyframes floatElevationMobile {
+    0% { transform: translateY(-10px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(-10px); }
+  }
+
+  .hero-title {
+    font-size: 48px;
+    letter-spacing: -1px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* En móviles pequeños permitimos scroll SOLO si la pantalla es tan baja que el texto no cabe */
+  .home-dark-viewport {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .home-hero-container {
+    transform: translateY(0);
+    animation: floatElevationMobileSimple 6s infinite ease-in-out;
+    padding: 60px 20px; 
+  }
+
+  @keyframes floatElevationMobileSimple {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .hero-title {
+    font-size: 34px;
+    line-height: 1.2;
+  }
+
+  .hero-title br {
+    display: none;
+  }
+
+  .hero-subtitle {
+    font-size: 15px;
+    margin: 0 0 32px 0;
+  }
+
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
+    gap: 12px;
   }
+
   .cta-btn {
     width: 100%;
     text-align: center;
+    box-sizing: border-box;
   }
 }
