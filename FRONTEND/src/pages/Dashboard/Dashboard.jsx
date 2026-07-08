@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import TaskForm from "../components/TaskForm/TaskForm";
-import { useAuth } from "../context/AuthContext";
-import { getTasks, createTask, updateTask, deleteTask } from "../services/api";
-import { usePomodoro } from "../hooks/usePomodoro";
-import KanbanHeader from "../components/Dashboard/KanbanHeader";
-import KanbanColumn from "../components/Dashboard/KanbanColumn";
-import PomodoroWidget from "../components/Dashboard/PomodoroWidget";
-import ActivitySidebar from "../components/Dashboard/ActivitySidebar";
+import TaskForm from '../../components/TaskForm/TaskForm';
+import { useAuth } from "../../context/AuthContext";
+import { getTasks, createTask, updateTask, deleteTask } from '../../services/api';
+import { usePomodoro } from "../../hooks/usePomodoro";
+import KanbanHeader from "../../components/Dashboard/KanbanHeader";
+import KanbanColumn from "../../components/Dashboard/KanbanColumn";
+import PomodoroWidget from "../../components/Dashboard/PomodoroWidget";
+import ActivitySidebar from "../../components/Dashboard/ActivitySidebar";
 import confetti from "canvas-confetti";
 import "./Dashboard.css";
 

@@ -1,3 +1,6 @@
+
+/* formulario */
+
 .auth-form,
 .sidebar-card form {
   display: flex;
@@ -5,19 +8,20 @@
   gap: 16px;
 }
 
-/* Estilización global de inputs y selects en el panel oscuro */
+/* inputs */
+
 .sidebar-card input[type="text"],
 .sidebar-card input[type="date"],
 .sidebar-card select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
   font-family: inherit;
   font-size: 14px;
-  padding: 10px 14px;
   color: #ffffff;
   background-color: #1f1e2e;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
   transition: all 0.2s ease;
 }
 
@@ -28,63 +32,173 @@
   box-shadow: 0 0 8px rgba(139, 92, 246, 0.25);
 }
 
-/* Botón de envío del formulario estilo Taskify */
+.sidebar-card input[type="date"] {
+  padding-right: 14px;
+}
+
+.sidebar-card input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 2px;
+  filter: invert(0.8);
+}
+
+/* select */
+
+.sidebar-card select {
+  padding: 10px 40px 10px 14px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
+/* radio */
+
+.board-question {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.radio-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 14px;
+  user-select: none;
+}
+
+.radio-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #6366f1;
+}
+
+/* selector de tablero */
+
+.board-selector {
+  animation: fadeIn 0.2s ease;
+}
+
+.board-select-label {
+  display: block;
+  margin-bottom: 6px;
+  color: #a78bfa;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.board-select {
+  border-color: #3b82f6;
+}
+
+/* sin tableros */
+
+.no-boards-box {
+  padding: 12px;
+  text-align: center;
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px dashed #3b82f6;
+  border-radius: 8px;
+}
+
+.no-boards-text {
+  margin: 0 0 8px;
+  color: #60a5fa;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.create-board-link {
+  color: #a78bfa;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.create-board-link:hover {
+  color: #c4b5fd;
+}
+
+/* botones */
+
 .sidebar-card button[type="submit"] {
+  margin-top: 6px;
+  padding: 10px;
   font-family: inherit;
   font-size: 14px;
   font-weight: 600;
   color: #ffffff;
   background-color: #8b5cf6;
   border: 1px solid #a78bfa;
-  padding: 10px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: 6px;
   box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
 }
 
-.sidebar-card button[type="submit"]:hover {
+.sidebar-card button[type="submit"]:hover:not(:disabled) {
   background-color: #7c3aed;
   box-shadow: 0 6px 16px rgba(124, 58, 237, 0.4);
 }
 
-/* Actualiza o añade esta regla específica para el select */
-.sidebar-card select {
+.sidebar-card button[type="submit"]:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* cancelar edición */
+
+.cancel-edit-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
   font-family: inherit;
   font-size: 14px;
-  padding: 10px 40px 10px 14px; /* 💡 Clave: 40px a la derecha para que la flecha respire */
-  color: #ffffff;
-  background-color: #1f1e2e;
+  font-weight: 500;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
   cursor: pointer;
-
-  /* Esto estiliza la apariencia nativa en algunos navegadores */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  /* Reinyectamos una flecha elegante SVG personalizada si quieres que combine al 100%, 
-     o si prefieres mantener la nativa bien posicionada, elimina estas 3 líneas de abajo: */
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-size: 16px;
+  transition: all 0.2s ease;
 }
 
-/* 📅 Ajuste extra para que el icono del calendario tampoco se quede pegado */
-.sidebar-card input[type="date"] {
-  padding-right: 14px;
+.cancel-edit-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Separación interna para los iconos nativos de fecha de Chrome/Safari */
-.sidebar-card input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  border-radius: 4px;
-  margin-right: 2px;
-  /* Hace que el icono pase a ser grisáceo elegante en vez de negro nativo */
-  filter: invert(0.8);
+/* animaciones */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+

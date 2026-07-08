@@ -3,7 +3,7 @@ const Board = require('../models/board.model');
 // Obtener los tableros del usuario logueado
 const getBoards = async (req, res) => {
   try {
-    // Si tu middleware de auth inyecta el usuario en req.user:
+   
     const userId = req.user ? req.user.id : req.body.userId; 
     
     const boards = await Board.find({ user: userId });
@@ -32,7 +32,7 @@ const createBoard = async (req, res) => {
   }
 };
 
-// ✏️ CONTROLADOR PARA EDITAR EL TABLERO (PUT /boards/:id)
+// CONTROLADOR PARA EDITAR EL TABLERO (PUT /boards/:id)
 const updateBoard = async (req, res) => {
   try {
     const { name, description, color } = req.body;
@@ -55,7 +55,7 @@ const updateBoard = async (req, res) => {
   }
 };
 
-// 🗑️ CONTROLADOR PARA BORRAR EL TABLERO (DELETE /boards/:id)
+//  CONTROLADOR PARA BORRAR EL TABLERO (DELETE /boards/:id)
 const deleteBoard = async (req, res) => {
   try {
     // Buscamos y eliminamos el tablero si pertenece al usuario logueado
@@ -65,9 +65,7 @@ const deleteBoard = async (req, res) => {
       return res.status(404).json({ message: "Tablero no encontrado o no autorizado" });
     }
 
-    // [Opcional] Desvincular las tareas que pertenecían a este tablero (las pasa a board: null)
-    // Si tienes el modelo Task importado aquí, puedes descomentar la siguiente línea:
-    // await Task.updateMany({ board: req.params.id }, { board: null });
+   
 
     return res.status(200).json({ message: "Tablero eliminado con éxito" });
   } catch (error) {

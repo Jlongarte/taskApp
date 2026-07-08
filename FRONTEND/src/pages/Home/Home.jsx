@@ -1,8 +1,19 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Ferrofluid from "../components/Ferrofluid/Ferrofluid";
+import Ferrofluid from "../../components/Ferrofluid/Ferrofluid";
 import "./Home.css";
 
 const Home = () => {
+  useEffect(() => {
+    document.documentElement.style.setProperty("overflow", "hidden", "important");
+    document.body.style.setProperty("overflow", "hidden", "important");
+
+    return () => {
+      document.documentElement.style.removeProperty("overflow");
+      document.body.style.removeProperty("overflow");
+    };
+  }, []);
+
   return (
     <div className="home-dark-viewport">
       <div className="background-effect">
@@ -25,24 +36,20 @@ const Home = () => {
       </div>
       
       <section className="home-hero-container">
-        {/* Pequeña insignia superior style */}
         <div className="framer-badge">
           <span className="badge-sparkle">✦</span> Made for Developers
         </div>
 
-        {/* Título Principal */}
         <h1 className="hero-title">
-          The best platform for <br />
-          <span>cross-functional work.</span>
+          <span>The best platform for</span> <br />
+          cross-functional work.
         </h1>
 
-        {/* Subtítulo descriptivo */}
         <p className="hero-subtitle">
           Want better results in your organization? TaskApp helps teams get
           clarity, achieve greater impact, and scale to meet company goals.
         </p>
 
-        {/* Botones de acción principales */}
         <div className="hero-cta-group">
           <Link to="/register" className="cta-btn cta-primary">
             Get started

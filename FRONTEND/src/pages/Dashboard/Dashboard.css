@@ -1,14 +1,10 @@
-/* ==========================================
-   1. GLOBAL CONTAINER & BASE STYLES
-   ========================================== */
 .kanban-wrapper {
-
   margin: 0 auto;
   background-color: #0d0c15;
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 24px;
+  padding: 24px 16px;
   box-sizing: border-box;
   min-height: 100vh;
 }
@@ -18,9 +14,6 @@
   align-items: center;
 }
 
-/* ==========================================
-   2. KANBAN HEADER & PROGRESS BAR
-   ========================================== */
 .kanban-header {
   display: flex;
   flex-direction: column;
@@ -144,9 +137,6 @@
   transition: width 0.4s ease;
 }
 
-/* ==========================================
-   3. CORE LAYOUT & SIDEBAR
-   ========================================== */
 .kanban-content {
   display: flex;
   flex-direction: row;
@@ -184,9 +174,6 @@ form select option {
   color: #ffffff !important;
 }
 
-/* ==========================================
-   4. KANBAN COLUMNS AND CARDS LIST
-   ========================================== */
 .kanban-columns-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -212,7 +199,6 @@ form select option {
   flex-direction: column;
   gap: 12px;
   height: auto;
-  overflow: visible;
   min-height: 150px;
 }
 
@@ -249,15 +235,13 @@ form select option {
   font-size: 12px;
   font-weight: 600;
 }
-.task-list{
-   
-    display: flex;
-    flex-direction: column;
-     gap: 8px;
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
-/* ==========================================
-   5. INTERACTION & DRAG STYLES
-   ========================================== */
+
 .kanban-column.column-drag-hover {
   background-color: #1e1b30 !important;
   border: 1px dashed #8b5cf6 !important;
@@ -269,9 +253,6 @@ form select option {
   pointer-events: none;
 }
 
-/* ==========================================
-   6. ACTIVITY HISTORY SIDEBAR
-   ========================================== */
 .activity-sidebar {
   position: fixed;
   top: 0;
@@ -392,9 +373,6 @@ form select option {
   line-height: 1.4;
 }
 
-/* ==========================================
-   7. FLOATING POMODORO WIDGET
-   ========================================== */
 .pomodoro-floating-widget {
   position: fixed;
   bottom: 24px;
@@ -473,16 +451,27 @@ form select option {
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* ==========================================
-   8. RESPONSIVE BREAKPOINTS 
-   ========================================== */
-   /* Tablet */
 @media (max-width: 1024px) {
-  /* Ajustes para tablets */
+  .kanban-wrapper {
+    padding: 20px 12px;
+  }
+
+  .kanban-content {
+    flex-direction: column;
+  }
+
+  .kanban-sidebar {
+    width: 100%;
+  }
+
+  .kanban-columns-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
 @media (max-width: 768px) {
   .kanban-wrapper {
-    padding: 16px;
+    padding: 16px 8px;
   }
 
   .kanban-header-top {
@@ -500,14 +489,6 @@ form select option {
     flex: 1;
   }
 
-  .kanban-content {
-    flex-direction: column;
-  }
-
-  .kanban-sidebar {
-    width: 100%;
-  }
-
   .kanban-columns-container {
     grid-template-columns: 1fr;
   }
@@ -518,8 +499,8 @@ form select option {
   }
 
   .pomodoro-floating-widget {
-    left: 16px;
-    right: 16px;
+    left: 8px;
+    right: 8px;
     bottom: 16px;
     justify-content: space-between;
   }

@@ -1,4 +1,4 @@
-// hooks/usePomodoro.js
+
 import { useState, useEffect } from "react";
 
 export const usePomodoro = (logActivity) => {
@@ -18,7 +18,7 @@ export const usePomodoro = (logActivity) => {
       interval = setInterval(() => setPomodoroTime((prev) => prev - 1), 1000);
     } else if (pomodoroTime === 0 && isTimerRunning) {
       setIsTimerRunning(false);
-      // ... (Toda tu lógica de AudioContext aquí dentro)
+      
       alert(`🎉 Focus session completed for: "${activePomodoro?.title}"!`);
       logActivity(`⏱️ Completed a Pomodoro focus session`);
       setActivePomodoro(null);
@@ -28,12 +28,12 @@ export const usePomodoro = (logActivity) => {
   }, [isTimerRunning, pomodoroTime, activePomodoro]);
 
  const startPomodoro = (task) => {
-  // Si vuelves a hacer clic en la tarea activa, alterna entre pausa y play en vez de reiniciar
+  
   if (activePomodoro && activePomodoro._id === task._id) {
     setIsTimerRunning((prev) => !prev);
     logActivity(isTimerRunning ? `⏸️ Paused focus on: "${task.title}"` : `⏰ Resumed focus on: "${task.title}"`);
   } else {
-    // Si es una tarea nueva o no había nada activo, se inicia desde cero
+    
     setActivePomodoro(task);
     setPomodoroTime(1500); // 25 minutos
     setIsTimerRunning(true);

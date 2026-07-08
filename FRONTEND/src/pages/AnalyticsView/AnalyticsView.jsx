@@ -46,7 +46,7 @@ export function AnalyticsView() {
       <div className="analytics-content">
         {/*  Encabezado */}
         <h1 className="analytics-title">Productivity Analytics</h1>
-        <p className="analytics-subtitle">Advanced insight into your board performance.</p>
+        <p className='analytics-subtitle'>Advanced insight into your board performance.</p>
 
         {/*  Cuadrícula de Gráficos */}
         <div className="analytics-grid">

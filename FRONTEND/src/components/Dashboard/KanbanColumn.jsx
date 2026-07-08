@@ -1,5 +1,5 @@
 
-import TaskList from "../TaskLists/TaskList"; // Ajusta la ruta a tu estructura
+import TaskList from "../TaskLists/TaskList"; 
 
 const KanbanColumn = ({ title, type, tasks, activeColumn, statusFilter, filterType, onDragOver, onDragLeave, onDrop, onEdit, onDelete, onStartPomodoro }) => {
   const isDimmed = statusFilter !== "all" && statusFilter !== filterType;
@@ -21,7 +21,7 @@ const KanbanColumn = ({ title, type, tasks, activeColumn, statusFilter, filterTy
         tasks={tasks} 
         onEdit={onEdit} 
         onDelete={onDelete} 
-        onStartPomodoro={onStartPomodoro} // 👈 Verifica que esta línea exista aquí
+        onStartPomodoro={onStartPomodoro} 
       />
     </div>
   );

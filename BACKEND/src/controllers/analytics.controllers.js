@@ -2,7 +2,7 @@ const Task = require('../models/task.model');
 
 const getAnalytics = async (req, res) => {
   try {
-    // [Tus dos queries anteriores se quedan igual...]
+    
     const statusDistribution = await Task.aggregate([
       { $group: { _id: "$status", value: { $sum: 1 } } },
       { $project: { name: "$_id", value: 1, _id: 0 } }
@@ -18,14 +18,13 @@ const getAnalytics = async (req, res) => {
       { $project: { fecha: "$_id", tareas: 1, _id: 0 } }
     ]);
 
-    // 🆕 NUEVA QUERY 3: Distribución por Prioridad (asumiendo que tienes un campo 'priority')
-    // Si no tienes prioridad, cámbialo por otro campo como "category" o "tags"
+    // Distribución por Prioridad 
     const priorityDistribution = await Task.aggregate([
       { $group: { _id: "$priority", value: { $sum: 1 } } },
       { $project: { name: "$_id", value: 1, _id: 0 } }
     ]);
 
-    // 🆕 NUEVA QUERY 4: Tareas creadas en los últimos 7 días (para comparar con las completadas)
+    // Tareas creadas en los últimos 7 días 
     const createdOverTime = await Task.aggregate([
       { $match: { createdAt: { $gte: sieteDiasAtras } } },
       { $group: { _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } }, creadas: { $sum: 1 } } },

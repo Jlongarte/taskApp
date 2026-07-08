@@ -10,7 +10,7 @@ const TaskList = ({ tasks, onEdit, onDelete, onStartPomodoro }) => {
           task={task}
           onEdit={onEdit}
           onDelete={onDelete}
-          onStartPomodoro={onStartPomodoro} // 👈 Súper importante: si falta esto aquí, la app se rompe
+          onStartPomodoro={onStartPomodoro} 
         />
       ))}
     </div>

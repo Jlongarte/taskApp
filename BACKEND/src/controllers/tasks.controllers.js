@@ -43,7 +43,7 @@ const createTask = async (req, res) => {
       date,
       status: status || "pending",
       comments: comments || "",
-      board: cleanBoardId, // 👈 Aquí se inyecta el ID del tablero
+      board: cleanBoardId, 
       user: req.user._id,
       progress: progress || 0,
     });
@@ -59,7 +59,7 @@ const createTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
   try {
-    // 📥 1. Extraemos 'progress' y 'comments' además de los campos anteriores
+    
     const { title, date, status, comments, progress, board } = req.body;
 
     const task = await Task.findById(req.params.id);
@@ -71,16 +71,16 @@ const updateTask = async (req, res) => {
       return res.status(403).json({ message: "Unauthorized" });
     }
 
-    // 🔄 2. Mapeamos las actualizaciones (respetando los valores anteriores si no se envían)
+    //  Mapeamos las actualizaciones 
     task.title = title || task.title;
     task.date = date || task.date;
     task.status = status || task.status;
     task.comments = comments !== undefined ? comments : task.comments;
     
-    // 🎛️ IMPORTANTE: Evaluamos si viene el campo progreso (usando typeof porque 0 es falsy en JS)
+
     task.progress = typeof progress === "number" ? progress : task.progress;
     
-    // 📁 Soportar también si se cambia de tablero en la edición
+   
     if (board !== undefined) {
       task.board = board && board.trim() !== "" ? board : null;
     }
@@ -97,7 +97,7 @@ const deleteTask = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Borra directamente por ID usando el método moderno de Mongoose
+   
     const deletedTask = await Task.findByIdAndDelete(id);
 
     if (!deletedTask) {

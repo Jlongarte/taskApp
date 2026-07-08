@@ -4,7 +4,7 @@ import { getUserProfile } from "../services/api";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // 🔍 LEER AL ARRANCAR: Inicializamos los estados leyendo directamente del localStorage
+  //  Inicializamos los estados leyendo directamente del localStorage
   const [token, setToken] = useState(() => {
     const storedToken = localStorage.getItem("token");
     const expiryTime = localStorage.getItem("kanban_expiry");
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      // Verificamos si los 5 días expiraron justo en este segundo (durante el uso de la app)
+      // Verificamos si los 5 días expiraron justo en este segundo 
       const expiryTime = localStorage.getItem("kanban_expiry");
       const now = new Date().getTime();
       if (expiryTime && now > parseInt(expiryTime, 10)) {
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = (newToken, userData) => {
-    // ⏳ CÁLCULO DE LOS 5 DÍAS EXACTOS:
+  
     // 5 días * 24 horas * 60 minutos * 60 segundos * 1000 milisegundos
     const FIVE_DAYS_IN_MS = 5 * 24 * 60 * 60 * 1000;
     const expiryDate = new Date().getTime() + FIVE_DAYS_IN_MS;

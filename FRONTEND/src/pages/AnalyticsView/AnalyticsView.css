@@ -6,8 +6,8 @@
   overflow-y: auto !important; 
   overflow-x: hidden !important; 
   color: #ffffff;
-  padding: 3rem 2rem; 
-  box-sizing: border-box;
+  padding: 1rem 2rem; 
+  
 }
 
 .analytics-content {
@@ -25,7 +25,9 @@
 }
 
 .analytics-subtitle {
-  color: #9ca3af;
+
+    color: #94a3b8;
+    font-size: 14px;
   margin-bottom: 2.5rem;
 }
 
@@ -35,6 +37,7 @@
   grid-template-columns: 1fr; 
   gap: 2rem;
   width: 100%;
+  
 }
 
 .analytics-card {

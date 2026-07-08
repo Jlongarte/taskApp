@@ -1,5 +1,8 @@
+/* CARD */
+
 .kanban-task-card {
-  background-color: #1f1e2e; /* Fondo un punto más claro que la columna para dar relieve */
+  position: relative;
+  background-color: #1f1e2e;
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -17,16 +20,22 @@
   transform: translateY(-2px);
 }
 
-/* Bloque de Textos */
+/* CONTENT  */
+
+.card-content {
+  padding-right: 30px;
+}
+
 .card-content h3 {
   margin: 0;
   font-size: 15px;
   font-weight: 600;
-  color: #ffffff; /* Título blanco nítido */
+  color: #fff;
   line-height: 1.4;
 }
 
-/* Pie de Tarjeta */
+/* FOOTER  */
+
 .card-footer {
   display: flex;
   justify-content: space-between;
@@ -48,100 +57,92 @@
 .card-actions {
   display: flex;
   gap: 12px;
+  pointer-events: auto;
 }
 
-/* Enlaces de acciones simulando texto clicable elegante */
-.action-btn-wrapper custom-button {
-  --color-secondary: #94a3b8;
-}
-
-.delete-task-btn {
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 500;
-  background: none;
-  border: none;
-  color: #f87171;
-  cursor: pointer;
-  padding: 0;
-  transition: color 0.15s ease;
-}
-
-.delete-task-btn:hover {
-  color: #ef4444;
-}
-
-/* ==========================================================================
-   🎯 CORRECCIÓN CLAVE: Desactivamos punteros SOLO en textos sueltos,
-   dejando libre el footer para que los botones reciban los clics.
-   ========================================================================== */
+/*  INTERACTION  */
 
 .kanban-task-card .card-content,
 .kanban-task-card h3,
 .kanban-task-card .task-date {
-  pointer-events: none; /* Evita que el texto plano interfiera con el arrastre */
+  pointer-events: none;
 }
 
-/* 🔓 El footer y las acciones DEBEN ser interactivos */
 .kanban-task-card .card-footer,
-.kanban-task-card .card-actions {
-  pointer-events: auto !important;
-}
-
-/* 🚨 Forzamos al 100% que los botones sean clicables y muestren el puntero */
-.delete-task-btn {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
 .kanban-task-card .card-actions,
 .kanban-task-card button {
   pointer-events: auto;
 }
-/* 🚨 Forzamos la interacción directa con los botones de la tarjeta */
-.kanban-task-card button,
-.kanban-task-card .card-actions,
+
+/* EDIT BUTTON */
+
+.edit-task-btn {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-task-btn:hover {
+  background-color: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: #a5b4fc;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.15);
+}
+
+/*  DELETE BUTTON */
+
 .delete-task-btn {
-  pointer-events: auto !important;
-  cursor: pointer !important;
-}
-/* ==========================================================================
-   🎯 EL DISPARO EN EL BLANCO: Atacamos al Web Component real del Edit
-   ========================================================================== */
-
-/* Estilo para el botón envoltorio */
-.action-btn-wrapper {
-  background: none !important;
-  border: none !important;
-  padding: 0 !important;
-  cursor: pointer !important;
-}
-
-/* Estilo directo al custom-button secundario */
-.action-btn-wrapper custom-button[variant="secondary"],
-custom-button[variant="secondary"] {
-  font-family: inherit !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-
-  /* Tu paleta Dark SaaS */
-  --color-secondary: #94a3b8 !important; /* Si tu custom-button usa variables CSS */
-  background-color: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  color: #94a3b8 !important;
-
-  padding: 5px 12px !important;
-  border-radius: 6px !important;
-  display: inline-block !important;
-  transition: all 0.2s ease !important;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: rgba(248, 113, 113, 0.05);
+  border: 1px solid rgba(248, 113, 113, 0.15);
+  color: #f87171;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Efecto Hover para el custom-button */
-.action-btn-wrapper:hover custom-button[variant="secondary"],
-custom-button[variant="secondary"]:hover {
-  background-color: rgba(99, 102, 241, 0.15) !important;
-  border-color: rgba(99, 102, 241, 0.4) !important;
-  color: #a5b4fc !important;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.15) !important;
+.delete-task-btn:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.15);
+}
+
+/* POMODORO BUTTON */
+
+.card-pomodoro-trigger {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  margin: 0;
+  padding: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  opacity: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-pomodoro-trigger:hover {
+  opacity: 1;
+  transform: scale(1.15);
 }

@@ -48,8 +48,7 @@
   margin: 0;
   padding: 32px 16px;
   text-align: center;
-  color: #4b5563; /* Gris apagado discreto */
-  font-size: 13px;
+  color: #4b5563; 
   font-style: normal;
   border: 1px dashed rgba(255, 255, 255, 0.05);
   border-radius: 12px;

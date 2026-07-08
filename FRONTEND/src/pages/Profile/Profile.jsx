@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import UserNameForm from "../components/UserNameForm/UserNameForm";
-import PasswordForm from "../components/PasswordForm/PasswordForm";
-import AvatarForm from "../components/AvatarForm/AvatarForm";
+import { useAuth } from "../../context/AuthContext";
+import UserNameForm from "../../components/UserNameForm/UserNameForm";
+import PasswordForm from "../../components/PasswordForm/PasswordForm";
+import AvatarForm from "../../components/AvatarForm/AvatarForm";
 import "./Profile.css";
 
 const Profile = () => {

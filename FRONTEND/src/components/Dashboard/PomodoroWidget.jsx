@@ -1,4 +1,4 @@
-import React from "react";
+
 
 const PomodoroWidget = ({ activePomodoro, isTimerRunning, setIsTimerRunning, formatTime, pomodoroTime, setActivePomodoro }) => {
   if (!activePomodoro) return null;
@@ -17,7 +17,7 @@ const PomodoroWidget = ({ activePomodoro, isTimerRunning, setIsTimerRunning, for
           onClick={() => setIsTimerRunning(!isTimerRunning)}
           className={`pomodoro-btn ${isTimerRunning ? "pause" : "play"}`}
         >
-          {isTimerRunning ? "⏸️ Pause" : "▶️ Start"}
+          {isTimerRunning ? "⏸ Pause" : "▶ Start"}
         </button>
         <button
           onClick={() => {

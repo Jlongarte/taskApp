@@ -1,6 +1,6 @@
 const API_URL = "http://localhost:8080";
 
-//USERS
+// USERS
 const registerUser = async (formData) => {
   const res = await fetch(`${API_URL}/users/register`, {
     method: "POST",
@@ -67,25 +67,22 @@ const updateAvatar = async (token, formdata) => {
   return res.json();
 };
 
-//TASKS
-
-// 🌍 getTasks debe apuntar a tu ruta general de tareas
+// TASKS (Rutas limpias sin prefijo /api)
 const getTasks = async (token) => {
-  const response = await fetch(`http://localhost:8080/tasks`, {
+  const response = await fetch(`${API_URL}/tasks`, {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   return response.json();
 };
 
-// ➕ createTask debe hacer el POST a la ruta raíz de tareas
 const createTask = async (token, taskData) => {
-  const response = await fetch(`http://localhost:8080/tasks`, {
+  const response = await fetch(`${API_URL}/tasks`, {
     method: 'POST',
     headers: { 
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}` 
     },
-    body: JSON.stringify(taskData) // Aquí ya viajan title, date, status, comments y board
+    body: JSON.stringify(taskData)
   });
   return response.json();
 };
