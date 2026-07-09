@@ -42,6 +42,31 @@ high-level projects, track daily tasks using custom completion sliders, visualiz
 
 ---
 
+## 📡 API Endpoints Summary
+
+### Authentication & Profiles
+* `POST /users/register` - Create an account with an optional image upload (`multipart/form-data`).
+* `POST /users/login` - Authenticate user and sign safe JWT.
+* `GET /users/profile` - Fetch authenticated user credentials.
+* `PUT /users/name` - Update public identity signature.
+* `PUT /users/avatar` - Update profile picture on the fly.
+
+### Tasks & Boards
+* `GET /tasks` - Retrieve tasks belonging strictly to the logged-in user.
+* `POST /tasks` - Create a task (accepts optional structural `board` reference).
+* `PUT /tasks/:id` - Dynamic updates (status changes, comments, slider progress).
+* `DELETE /tasks/:id` - Permanently remove task item from logs.
+* `GET /boards` - Retrieve workspace collections.
+* `POST /boards` - Provision new designated kanban canvas.
+
+---
+
+## 📝 License
+This project is open-source and available under the MIT License.
+
+---
+
+
 ## ⚙️ Project Structure
 
 ```text
@@ -74,25 +99,3 @@ high-level projects, track daily tasks using custom completion sliders, visualiz
     ├── package-lock.json
     └── package.json
 
-
-## 📡 API Endpoints Summary
-
-### Authentication & Profiles
-* `POST /users/register` - Create an account with an optional image upload (`multipart/form-data`).
-* `POST /users/login` - Authenticate user and sign safe JWT.
-* `GET /users/profile` - Fetch authenticated user credentials.
-* `PUT /users/name` - Update public identity signature.
-* `PUT /users/avatar` - Update profile picture on the fly.
-
-### Tasks & Boards
-* `GET /tasks` - Retrieve tasks belonging strictly to the logged-in user.
-* `POST /tasks` - Create a task (accepts optional structural `board` reference).
-* `PUT /tasks/:id` - Dynamic updates (status changes, comments, slider progress).
-* `DELETE /tasks/:id` - Permanently remove task item from logs.
-* `GET /boards` - Retrieve workspace collections.
-* `POST /boards` - Provision new designated kanban canvas.
-
----
-
-## 📝 License
-This project is open-source and available under the MIT License.
