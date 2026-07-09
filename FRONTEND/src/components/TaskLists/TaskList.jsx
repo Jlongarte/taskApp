@@ -1,5 +1,5 @@
 
-import TaskCard from "../TaskCard/Taskcard.jsx"
+import TaskCard from "../TaskCard/TaskCard"
 
 const TaskList = ({ tasks, onEdit, onDelete, onStartPomodoro }) => {
   return (
