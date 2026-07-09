@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: "https://task-app-dmno.vercel.app",
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    
   })
 );
 
