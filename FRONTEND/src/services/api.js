@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080";
+const API_URL = "https://taskapp-6gsr.onrender.com/";
 
 // USERS
 const registerUser = async (formData) => {
