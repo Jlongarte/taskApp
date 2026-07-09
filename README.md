@@ -74,8 +74,7 @@ high-level projects, track daily tasks using custom completion sliders, visualiz
     ├── package-lock.json
     └── package.json
 
----
-    
+
 ## 📡 API Endpoints Summary
 
 ### Authentication & Profiles
