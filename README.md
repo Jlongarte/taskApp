@@ -61,11 +61,6 @@ high-level projects, track daily tasks using custom completion sliders, visualiz
 
 ---
 
-## 📝 License
-This project is open-source and available under the MIT License.
-
----
-
 
 ## ⚙️ Project Structure
 
@@ -98,4 +93,11 @@ This project is open-source and available under the MIT License.
     ├── index.html            # Main HTML document template
     ├── package-lock.json
     └── package.json
+
+---
+
+## 📝 License
+This project is open-source and available under the MIT License.
+
+
 
