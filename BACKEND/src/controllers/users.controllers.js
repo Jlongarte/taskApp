@@ -9,15 +9,24 @@ const register = async (req, res) => {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const existingUser = await User.findOne({ email });
+    
+    const existingUser = await User.findOne({
+      $or: [{ email: email }, { username: username }]
+    });
+
     if (existingUser) {
-      return res.status(400).json({ message: "Email already registered" });
+      if (existingUser.email === email) {
+        return res.status(400).json({ message: "Email address is already registered" });
+      }
+      if (existingUser.username === username) {
+        return res.status(400).json({ message: "Username is already taken" });
+      }
     }
 
     const newUser = new User({
       username,
       email,
-      password,
+      password, 
       avatar: req.file ? req.file.path : "",
     });
 
@@ -30,6 +39,23 @@ const register = async (req, res) => {
     });
   } catch (error) {
     console.error("--- DETALLE DEL ERROR DE REGISTRO ---", error);
+
+   
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyValue)[0];
+      if (field === "email") {
+        return res.status(400).json({ message: "Email address is already registered" });
+      }
+      if (field === "username") {
+        return res.status(400).json({ message: "Username is already taken" });
+      }
+    }
+
+    
+    if (error.name === "ValidationError") {
+      return res.status(400).json({ message: error.message });
+    }
+
     return res.status(500).json({
       success: false,
       message: "Error registering user",

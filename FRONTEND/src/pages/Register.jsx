@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "../services/api";
+import { registerUser } from "../services/api"; 
 import "../pages/Login/Login.css";
 
 const Register = () => {
@@ -25,22 +25,19 @@ const Register = () => {
     ev.preventDefault();
     setMessage("");
 
-    const jsonBody = {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-    };
+  
+    const dataToSend = new FormData();
+    dataToSend.append("username", formData.username);
+    dataToSend.append("email", formData.email);
+    dataToSend.append("password", formData.password);
+
+    if (avatar) {
+      dataToSend.append("avatar", avatar); 
+    }
 
     try {
-      const res = await fetch("http://localhost:8080/users/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(jsonBody),
-      });
-
-      const data = await res.json();
+      
+      const data = await registerUser(dataToSend);
 
       if (data.success) {
         setMessage("Registration successful! Redirecting to login...");
@@ -58,13 +55,13 @@ const Register = () => {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        {/*  Encabezado */}
+        {/* Encabezado */}
         <div className="auth-header">
           <h2>Create Account</h2>
           <p>Get started with your new management board</p>
         </div>
 
-        {/*  Formulario */}
+        {/* Formulario */}
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
             <label>Username</label>
@@ -127,7 +124,12 @@ const Register = () => {
           </button>
         </form>
 
-        {message && <div className="auth-error-message">{message}</div>}
+        
+        {message && (
+          <div className={message.includes("successful") ? "auth-success-message" : "auth-error-message"}>
+            {message}
+          </div>
+        )}
       </div>
     </div>
   );

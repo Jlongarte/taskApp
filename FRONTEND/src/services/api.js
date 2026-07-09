@@ -24,7 +24,7 @@ const getUserProfile = async (token) => {
   const res = await fetch(`${API_URL}/users/profile`, {
     method: "GET",
     headers: {
-      "Content-Type": "application/json",
+      
       Authorization: `Bearer ${token}`,
     },
   });
@@ -59,7 +59,7 @@ const updateAvatar = async (token, formdata) => {
   const res = await fetch(`${API_URL}/users/avatar`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json",
+      
       Authorization: `Bearer ${token}`,
     },
     body: formdata,
@@ -67,7 +67,7 @@ const updateAvatar = async (token, formdata) => {
   return res.json();
 };
 
-// TASKS (Rutas limpias sin prefijo /api)
+// TASKS 
 const getTasks = async (token) => {
   const response = await fetch(`${API_URL}/tasks`, {
     headers: { 'Authorization': `Bearer ${token}` }

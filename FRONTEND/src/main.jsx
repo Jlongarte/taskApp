@@ -9,7 +9,7 @@ import Login from '../src/pages/Login/Login.jsx';
 import Register from '../src/pages/Register.jsx';
 import Profile from '../src/pages/Profile/Profile.jsx';
 import Dashboard from '../src/pages/Dashboard/Dashboard.jsx';
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/NotFound/NotFound";
 import { AnalyticsView } from '../src/pages/AnalyticsView/AnalyticsView.jsx';
 import  WorkspacesView  from '../src/pages/WorkspacesView/WorkspacesView.jsx';
 import { BrowserRouter, Routes, Route } from "react-router-dom";

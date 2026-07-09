@@ -213,3 +213,16 @@ body:has(.auth-container),
   color: #fca5a5;
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
+
+
+/*  Mensaje de Éxito en Verde */
+.auth-success-message {
+  color: #10b981; 
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+}
