@@ -44,7 +44,7 @@ high-level projects, track daily tasks using custom completion sliders, visualiz
 
 ## ⚙️ Project Structure
 
-
+```text
 ├── BACKEND/
 │   ├── src/
 │   │   ├── controllers/      # Authentication, Task, and Workspace logic
@@ -73,6 +73,9 @@ high-level projects, track daily tasks using custom completion sliders, visualiz
     ├── index.html            # Main HTML document template
     ├── package-lock.json
     └── package.json
+
+---
+    
 ## 📡 API Endpoints Summary
 
 ### Authentication & Profiles
