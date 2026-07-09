@@ -1,5 +1,5 @@
 
-import TaskCard from "../TaskCard/TaskCard"; // Ajusta la ruta a tu estructura
+import TaskCard from "../TaskCard/TaskCard.jsx"; 
 
 const TaskList = ({ tasks, onEdit, onDelete, onStartPomodoro }) => {
   return (
