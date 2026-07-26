@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // CORS
 app.use(
   cors({
-    origin: "https://task-app-dmno.vercel.app",
+    origin: "https://task-app-three-ruddy.vercel.app",
     credentials: true,
     
   })
@@ -25,11 +25,13 @@ app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 
+
 // Rutas
 app.use("/tasks", tasksRoutes);
 app.use("/users", authRoutes);
 app.use("/analytics", analyticsRoutes);
 app.use("/boards", boardRoutes);
+
 
 // 404
 app.use((req, res, next) => {

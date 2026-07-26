@@ -4,6 +4,7 @@ const User = require("../models/user.model");
 
 const register = async (req, res) => {
   try {
+     message: "VERSION NUEVA 26 JULIO"
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
