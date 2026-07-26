@@ -21,7 +21,7 @@ const TaskForm = ({ onSubmitTask, taskToEdit, clearTaskToEdit }) => {
   useEffect(() => {
     if (!token) return;
 
-    fetch("http://localhost:8080/boards", {
+    fetch("https://taskapp-6gsr.onrender.com/boards", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
