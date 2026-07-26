@@ -10,7 +10,7 @@ export function AnalyticsView() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8080/analytics')
+    fetch('https://taskapp-6gsr.onrender.com/analytics')
       .then((res) => res.json())
       .then((backendData) => {
         setData({
